@@ -1,11 +1,7 @@
 from flask_cors import CORS
 from flask import Flask, request, jsonify
-from dotenv import load_dotenv, find_dotenv
 from connection import db
-from seed_data import seedData
-
-# Load Environment Variables
-
+# from seed_data import seedData
 
 
 def create_app():
@@ -19,8 +15,10 @@ def create_app():
     db.init_app(app)
 
     # Import routes
+    from routes import recipes
 
     # Register Blueprints
+    app.register_blueprint(recipes, url_prefix='/recipes')
 
     with app.app_context():
         db.create_all()

@@ -1,6 +1,6 @@
 # Model for Recipes
 
-from server import db
+from connection import db
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)

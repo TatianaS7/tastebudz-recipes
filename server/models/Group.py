@@ -1,6 +1,6 @@
 # Model for Groups for sharing recipes
 
-from server import db
+from connection import db
 
 class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
