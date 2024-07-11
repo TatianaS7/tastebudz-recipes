@@ -5,15 +5,20 @@ from connection import db
 class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    members = db.Column(db.String(500), nullable=False)
-    recipes = db.Column(db.String(500), nullable=False)
-    created_by = db.Column(db.String(100), nullable=False)
+    members = db.Column(db.JSON, nullable=False)
+    recipes = db.Column(db.JSON, nullable=True)
+    admin = db.Column(db.String(100), nullable=False)
 
-    def __init__(self, name, members, recipes, created_by):
+    def __init__(self, name, members, recipes, admin):
         self.name = name
+        if not members:
+            members = []
+        group_admin = { "email": admin, "role": "admin" }
+        if not group_admin in members:
+            members.append(group_admin)
         self.members = members
-        self.recipes = recipes
-        self.created_by = created_by
+        self.recipes = recipes if recipes else []
+        self.admin = admin
 
     def serialize(self):
         return {
@@ -21,5 +26,5 @@ class Group(db.Model):
             'name': self.name,
             'members': self.members,
             'recipes': self.recipes,
-            'created_by': self.created_by
+            'admin': self.admin
         }
