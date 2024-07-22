@@ -22,7 +22,9 @@ def create_recipe():
                 time= data.get('time', None),
                 image= data.get('image', None),
                 tags=data['tags'],
-                user=data['user']
+                user=data['user'],
+                group_id= data.get('group_id', None),
+                is_public= data.get('is_public', True)
         )
         db.session.add(new_recipe)
         db.session.commit()
@@ -72,6 +74,8 @@ def update_recipe(id):
                 recipe.image = data['image']
             if 'tags' in data:
                 recipe.tags = data['tags']
+            if 'is_public' in data:
+                recipe.is_public = data['is_public']
             db.session.commit()
             return jsonify(recipe.serialize())
         else:
