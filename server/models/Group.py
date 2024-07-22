@@ -6,7 +6,7 @@ class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     members = db.Column(db.JSON, nullable=False)
-    recipes = db.Column(db.JSON, nullable=True)
+    recipes = db.relationship('Recipe', backref='group', lazy=True)
     admin = db.Column(db.String(100), nullable=False)
 
     def __init__(self, name, members, recipes, admin):
@@ -28,3 +28,4 @@ class Group(db.Model):
             'recipes': self.recipes,
             'admin': self.admin
         }
+    
