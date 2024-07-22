@@ -1,0 +1,57 @@
+[
+    {
+        "name": "Chicken Alfredo",
+        "ingredients": [{"ingredient": "Chicken","quantity": "1 lb"},{"ingredient": "Alfredo Sauce","quantity": "1 jar"},{"ingredient": "Pasta","quantity": "1 box"}],
+        "instructions": ["Cook chicken", "cook pasta", "mix together with alfredo sauce"],
+        "servings": 5,
+        "time": 45,
+        "tags": ["pasta", "chicken", "dinner"],
+        "user": "liz3@gmail.com",
+        "group_id": 2,
+        "is_public": false
+    },
+    {
+        "name": "Chicken Parmesan",
+        "ingredients": [{"ingredient": "Chicken","quantity": "1 lb"},{"ingredient": "Pasta Sauce","quantity": "1 jar"},{"ingredient": "Mozzarella Cheese","quantity": "1 cup"}],
+        "instructions": ["Cook chicken", "Top with pasta sauce and cheese", "Bake for 30 minutes"],
+        "servings": 3,
+        "time": 25,
+        "tags": ["chicken", "cheese", "dinner"],
+        "user": "justinaembers@gmail.com",
+        "group_id": 2,
+        "is_public": false
+    },
+    {
+        "name": "Pancakes",
+        "ingredients": [{"ingredient": "Flour","quantity": "1 cup"},{"ingredient": "Milk","quantity": "1 cup"},{"ingredient": "Eggs","quantity": "1"}],
+        "instructions": ["Mix ingredients together", "Cook on griddle"],
+        "servings": 4,
+        "time": 15,
+        "tags": ["breakfast", "pancakes"],
+        "user": "ethanclinton@gmail.com",
+        "group_id": 3,
+        "is_public": false
+    },
+    {
+        "name": "Strawberry Cheesecake French Toast",
+        "ingredients": [{"ingredient": "Challah Bread","quantity": "4 slices"},{"ingredient": "Cream Cheese","quantity": "1/2 cup"},{"ingredient": "Strawberries","quantity": "1/2 cup"}, {"ingredient": "Eggs","quantity": "2"}, {"ingredient": "Milk of Choice","quantity": "1/4 cup"}, {"ingredient": "Vanilla Extract","quantity": "1 tsp"}, {"ingredient": "Cinnamon","quantity": "1/2 tsp"}, {"ingredient": "Butter","quantity": "1 tbsp"}, {"ingredient": "Syrup of Choice","quantity": "1/4 cup"}, {"ingredient": "Powdered Sugar","quantity": "1 tbsp"}],
+        "instructions": ["Mix cream cheese, strawberries, and powdered sugar together", "Spread mixture between two slices of bread", "Mix eggs, milk, vanilla, and cinnamon together", "Dip sandwich in egg mixture", "Cook on griddle", "Top with syrup, powdered sugar, and fresh strawberries"],
+        "servings": 2,
+        "time": 20,
+        "tags": ["breakfast", "french toast", "strawberry", "cheesecake"],
+        "user": "aliyah_walters@yahoo.com",
+        "group_id": 3,
+        "is_public": false
+    },
+    {
+        "name": "Avocado Toast",
+        "ingredients": [{"ingredient": "Sourdough Bread","quantity": "2 slices"},{"ingredient": "Avocado","quantity": "1"},{"ingredient": "Crushed Red Pepper Flakes","quantity": "1 pinch"}, {"ingredient": "Sea Salt","quantity": "1 pinch"}, {"ingredient": "Pepper","quantity": "1 pinch"}],
+        "instructions": ["Toast bread", "Mash avocado", "Spread avocado on toast", "Top with red pepper flakes, sea salt, and pepper"],
+        "servings": 1,
+        "time": 5,
+        "tags": ["breakfast", "avocado", "toast"],
+        "user": "ethanclinton@gmail.com",
+        "group_id": 3,
+        "is_public": false
+    }   
+]
