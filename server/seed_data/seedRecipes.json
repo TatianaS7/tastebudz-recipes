@@ -53,5 +53,32 @@
         "user": "ethanclinton@gmail.com",
         "group_id": 3,
         "is_public": false
-    }   
+    },
+    {
+        "name": "Chicken Tacos",
+        "ingredients": [{"ingredient": "Chicken","quantity": "1 lb"},{"ingredient": "Taco Seasoning","quantity": "1 packet"},{"ingredient": "Tortillas","quantity": "8"}],
+        "instructions": ["Cook chicken", "Add taco seasoning", "Serve in tortillas"],
+        "servings": 4,
+        "time": 30,
+        "tags": ["chicken", "tacos", "dinner"],
+        "user": "samanthawebster@yahoo.com"
+    },
+    {
+        "name": "Salmon Croquettes",
+        "ingredients": [{"ingredient": "Canned Salmon","quantity": "1 can"},{"ingredient": "Bread Crumbs","quantity": "1/2 cup"},{"ingredient": "Egg","quantity": "1"}, {"ingredient": "Onion","quantity": "1/4 cup"}, {"ingredient": "Green Pepper","quantity": "1/4 cup"}, {"ingredient": "Salt","quantity": "1/2 tsp"}, {"ingredient": "Pepper","quantity": "1/4 tsp"}, {"ingredient": "Garlic Powder", "quantity":"1/4 tsp"}, {"ingredient": "Old Bay", "quantity": "1/4 tsp"}, {"ingredient": "Oil","quantity": "1/4 cup"}],
+        "instructions": ["Drain salmon", "Mix all ingredients together", "Form into patties", "Fry in oil until golden brown"],
+        "servings": 4,
+        "time": 20,
+        "tags": ["seafood", "salmon", "dinner"],
+        "user": "kimberly_watson1@gmail.com"
+    },
+    {
+        "name": "Watermelon Salad with Feta",
+        "ingredients": [{"ingredient": "Watermelon","quantity": "1/2"}, {"ingredient": "Feta Cheese","quantity": "1/2 cup"}, {"ingredient": "Mint","quantity": "1/4 cup"}, {"ingredient": "Balsamic Glaze","quantity": "1/4 cup"}],
+        "instructions": ["Cut watermelon into cubes", "Mix with feta and mint", "Drizzle with balsamic glaze"],
+        "servings": 4,
+        "time": 10,
+        "tags": ["salad", "watermelon", "feta", "light"],
+        "user": "david_saltman@yahoo.com"
+    }
 ]

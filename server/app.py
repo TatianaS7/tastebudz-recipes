@@ -15,11 +15,12 @@ def create_app():
     db.init_app(app)
 
     # Import routes
-    from routes import recipes, groups
+    from routes import recipes, groups, search
 
     # Register Blueprints
     app.register_blueprint(recipes, url_prefix='/recipes')
     app.register_blueprint(groups, url_prefix='/groups')
+    app.register_blueprint(search, url_prefix='/search')
 
     with app.app_context():
         db.create_all()
