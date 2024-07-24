@@ -15,7 +15,9 @@ def seed_groups():
                 name=group['name'],
                 members=group['members'],
                 recipes=group['recipes'],
-                admin=group['admin']
+                admin=group['admin'],
+                join_code=group.get('join_code'),
+                is_private=group.get('is_private', False)
             )
             db.session.add(new_group)
             db.session.commit()

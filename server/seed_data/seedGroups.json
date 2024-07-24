@@ -3,7 +3,9 @@
         "name": "Allison Family",
         "members": [{"email": "charlieallison@yahoo.com", "role": "admin"}],
         "recipes": [],
-        "admin": "charlieallison@yahoo.com"
+        "admin": "charlieallison@yahoo.com",
+        "join_code": "FG3alZ9",
+        "is_private": true
     },
     {
         "name": "Everything Chicken",
@@ -15,6 +17,8 @@
         "name": "The Breakfast Club",
         "members": [{"email": "aliyah_walters@yahoo.com", "role": "admin"}, {"email": "ethanclinton@gmail.com", "role": "member"}, {"email": "jahcoby39@gmail.com", "role": "member"}, {"email": "marywalsh@gmail.com", "role": "member"}],
         "recipes": [],
-        "admin": "aliyah_walters@yahoo.com"
+        "admin": "aliyah_walters@yahoo.com",
+        "join_code": "A4gh7GD",
+        "is_private": true
     }
 ]

@@ -1,10 +1,13 @@
 from flask import Blueprint, request, jsonify
 from sqlalchemy.orm.attributes import flag_modified
 from connection import db
+import random
 
 from models import Group, Recipe
 
 groups = Blueprint('groups', __name__)
+
+acceptable_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
 
 # GROUP ROUTES
 # Create a Group (admin)
@@ -14,16 +17,33 @@ def create_group():
         data = request.get_json()
         
         if 'name' not in data or 'admin' not in data:
-            return jsonify({'error': 'Missing required fields'})
+            return jsonify({'error': 'Missing required fields'}), 400
+        
+        # Check if the group name is unique
+        existing_group = Group.query.filter_by(name=data['name']).first()
+        if existing_group:                
+            return jsonify({'error': 'Group name already exists; Try a different name'})
+            
+        # Check if group is private
+        is_private = data.get('is_private', False)
+        if is_private:
+            # Generate a random join code
+            join_code = ''.join(random.choice(acceptable_chars) for i in range(7))
+        else:
+            join_code = None
 
         new_group = Group(
                 name=data['name'],
                 members=data.get('members', None),
                 recipes=data.get('recipes', None),
-                admin=data['admin']
+                admin=data['admin'],
+                join_code=join_code,
+                is_private=is_private
         )
+
         db.session.add(new_group)
         db.session.commit()
+
         return jsonify(new_group.serialize())
     except Exception as e:
         return(str(e))
@@ -45,7 +65,9 @@ def get_group(group_id):
             'name': group.name,
             'members': group.members,
             'recipes': recipes_data,
-            'admin': group.admin
+            'admin': group.admin,
+            'join_code': group.join_code,
+            'is_private': group.is_private
         }
 
         return jsonify(group_data)
@@ -71,7 +93,9 @@ def get_all_groups():
                 'name': group.name,
                 'members': group.members,
                 'recipes': recipes_data,
-                'admin': group.admin
+                'admin': group.admin,
+                'join_code': group.join_code,
+                'is_private': group.is_private
             }
             groups_data.append(group_data)
 
@@ -88,7 +112,13 @@ def join_group(group_id):
             return jsonify({'error': 'Group not found'})
         data = request.get_json()
         if not data or 'email' not in data:
-            return jsonify({'error': 'Missing required fields'})
+            return jsonify({'error': 'Email is required'})
+        
+        if group.is_private:
+            if 'join_code' not in data:
+                return jsonify({'error': 'Join code is required'})
+            if data['join_code'] != group.join_code:
+                return jsonify({'error': 'Invalid join code'})
         
         for member in group.members:
             if member['email'] == data['email']:
