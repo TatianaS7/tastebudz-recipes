@@ -57,7 +57,25 @@ def get_group(group_id):
 def get_all_groups():
     try:
         groups = Group.query.all()
-        return jsonify([group.serialize() for group in groups])
+        if not groups:
+            return jsonify({'error': 'No groups found'})
+        
+        groups_data = []
+        for group in groups:
+            # Serialize Recipes to avoid type errors
+            recipes_data = [recipe.to_dict() for recipe in group.recipes]
+
+            # Create a dictionary to return the group data
+            group_data = {
+                'id': group.id,
+                'name': group.name,
+                'members': group.members,
+                'recipes': recipes_data,
+                'admin': group.admin
+            }
+            groups_data.append(group_data)
+
+        return jsonify(groups_data)
     except Exception as e:
         return(str(e))
 
@@ -258,3 +276,64 @@ def delete_group_recipe(group_id, recipe_id):
             return jsonify({'error': 'You are not the owner of this recipe'})
     except Exception as e:
         return(str(e))
+    
+
+# Search Recipes in a Group (any member)
+@groups.route('/<groupID>/recipes', methods=['GET'])
+def search_group_recipes(groupID):
+    try:
+        query = request.args.get('query')
+        if not query:
+            return jsonify({'error': 'No query provided'})
+        
+        data = request.get_json()
+        if not data or 'email' not in data:
+            return jsonify({'error': 'Email is required'})
+        
+        recipe_data = []
+
+        # Check if the group exists
+        group = Group.query.get(groupID)
+        if not group:
+            return jsonify({'error': 'Group not found'})
+        
+        # Check if user is a member of the group
+        for member in group.members:
+            if member['email'] == data['email']:
+                break
+        else:
+            return jsonify({'error': 'Unauthorized user'})
+
+        # Search for public recipes by name
+        recipes_by_name = Recipe.query.filter(
+            (Recipe.name.ilike(f'%{query}%'))
+        ).filter_by(group_id=groupID).all()
+
+        # Add the recipes to the recipe_data list
+        recipe_data.extend([recipe.serialize() for recipe in recipes_by_name])
+
+        # Search for public recipes by ingredient
+        all_recipes = Recipe.query.filter_by(group_id=groupID).all()
+        for recipe in all_recipes:
+            ingredients = recipe.ingredients
+            if any(query.lower() in ingredient['ingredient'].lower() for ingredient in ingredients):
+                recipe_data.append(recipe.serialize())
+
+        # Search for public recipes by tag
+        recipes_by_tag = Recipe.query.filter(
+            Recipe.tags.like(f'%"{query}"%')
+        ).filter_by(group_id=groupID).all()
+                
+        # Add the recipes with the tag to the recipe_data list
+        recipe_data.extend([recipe.serialize() for recipe in recipes_by_tag])
+
+        if not recipe_data:
+            return jsonify({'error': 'No recipes found'})
+
+        # Make sure there are no duplicate recipes
+        recipe_data = list({recipe['id']: recipe for recipe in recipe_data}.values())
+
+        return jsonify(recipe_data)
+    except Exception as e:
+        return(str(e))
+
