@@ -88,56 +88,43 @@ def search_saves():
         saves_data = []
 
         # Search by Recipe Name
-        saves_by_name = Saves.query.filter(
+        saves_by_name = db.session.query(Saves, Recipe).join(Recipe, Saves.recipe_id == Recipe.id).filter(
             Saves.saved_by == data['saved_by'],
             Recipe.name.ilike(f'%{query}%')
         ).all()
 
-        saves_data.extend([recipe.serialize() for recipe in saves_by_name])
+        for save, recipe in saves_by_name:
+            save_data = save.serialize()
+            save_data['recipe'] = recipe.serialize()
+            saves_data.append(save_data)
 
         # Search by Recipe Ingredients
         all_saves = Saves.query.filter_by(saved_by=data['saved_by']).all()
-        print(all_saves)
+    
         for save in all_saves:
-            ingredients = save.ingredients
-            if any(query.lower() in ingredient.lower() for ingredient in ingredients):
-                saves_data.append(save.serialize())
+            recipe = Recipe.query.filter_by(id=save.recipe_id).first()
+            if any(query.lower() in ingredient['ingredient'].lower() for ingredient in recipe.ingredients):
+                save_data = save.serialize()
+                save_data['recipe'] = recipe.serialize()
+                saves_data.append(save_data)
 
         # Search by Recipe Tags
-        saves_by_tag = Saves.query.filter(
+        saves_by_tag = db.session.query(Saves, Recipe).join(Recipe, Saves.recipe_id == Recipe.id).filter(
             Saves.saved_by == data['saved_by'],
             Recipe.tags.like(f'%"{query}"%')
         ).all()
 
-        saves_data.extend([recipe.serialize() for recipe in saves_by_tag])
+        for save, recipe in saves_by_tag:
+            save_data = save.serialize()
+            save_data['recipe'] = recipe.serialize()
+            saves_data.append(save_data)
 
         if not saves_data:
             return jsonify({'message': 'No saves found'}), 400
         
         # Make sure there are no duplicates
-        saves_data = list({recipe['id']: recipe for recipe in saves_data}.values())
+        saves_data = list({save['id']: save for save in saves_data}.values())
 
         return jsonify(saves_data), 200
-    except Exception as e:
-        return jsonify({'message': str(e)}), 400
-
-
-# Delete a Save
-@saves.route('/<saveID>/delete', methods=['DELETE'])
-def delete_save(saveID):
-    try:
-        data = request.get_json()
-
-        if not data['saved_by']:
-            return jsonify({'message': 'User is required'}), 400
-        
-        save = Saves.query.filter_by(id=saveID, saved_by=data['saved_by']).first()
-        if not save:
-            return jsonify({'message': 'Save not found'}), 400
-
-        db.session.delete(save)
-        db.session.commit()
-
-        return jsonify({'message': 'Save deleted successfully!'}), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 400
