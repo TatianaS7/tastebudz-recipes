@@ -1,0 +1,23 @@
+#logo {
+    background: none;
+    border: none;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    border-bottom: var(--accent-color) 2px solid;
+    height: 5em;
+}
+
+.right-align {
+    display: flex;
+}
+
+#logout {
+    background: none;
+    border: none;
+}
