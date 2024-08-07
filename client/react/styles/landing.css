@@ -11,10 +11,11 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 #landing-header {
-    width: 65%;
+    width: 55%;
     margin: 3em;
 }
 
@@ -27,6 +28,7 @@ span {
     border: none;
     padding: 0.5em 2.5em;
     margin-bottom: 2em;
+    color: white;
 }
 
 h1 {
@@ -41,9 +43,9 @@ h3 {
 
 #categories {
     display: flex;
-    justify-content: center;
-    gap: 2em;
-    margin: 1em;
+    justify-content: space-evenly;
+    gap: 1em;
+    margin: 1em 4em;
     overflow-x: auto;
 }
 

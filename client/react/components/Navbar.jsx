@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./Logout";
 
 import "../styles/navbar.css";
+import logo from "../../assets/logo.png";
 
 import { SearchOutline } from 'react-ionicons'
 
@@ -13,14 +14,18 @@ function Navbar() {
 
     return (
         <nav>
-            <button id="logo">Tastebudz</button>
-            <div className="center-align">
-                <SearchOutline color={'#00000'} height="25px" width="25px" />                </div>
-            {isAuthenticated &&
+            <button id="logo"><img src={logo}></img></button>
                 <div className="right-align">
-                    <LogoutButton />
+                {isAuthenticated ?
+                    <>
+                        <SearchOutline color={'#00000'} height="25px" width="25px" />                
+                        <LogoutButton />
+                    </>
+                :
+                    <SearchOutline color={'#00000'} height="25px" width="25px" />                
+                }
                 </div>
-            }
+
         </nav>
     )
 }

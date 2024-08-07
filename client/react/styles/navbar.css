@@ -5,6 +5,10 @@
     font-weight: bold;
 }
 
+#logo img {
+    height: 1em;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -15,6 +19,8 @@ nav {
 
 .right-align {
     display: flex;
+    align-items: center;
+    gap: 2em;
 }
 
 #logout {

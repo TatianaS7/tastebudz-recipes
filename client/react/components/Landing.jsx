@@ -20,14 +20,14 @@ function Landing() {
                 </div>
 
                 <div id="landing-image">
-                    <ListCircleOutline color={'#b6a6c5'} height="350px" width="350px"/>
+                    <ListCircleOutline color={'#b6a6c5'} height="370px" width="370px"/>
                 </div>
             </div><hr/><br/>
 
             <h3>Categories</h3>
             <div id="categories">
                 <div className="category">
-                    <img src="https://simply-delicious-food.com/wp-content/uploads/2022/09/Breakfast-board28.jpg" alt="Placeholder" />
+                    <img src="https://simply-delicious-food.com/wp-content/uploads/2022/09/Breakfast-board28.jpg" alt="Breakfast" />
                     <p>Breakfast</p>
                 </div>
                 <div className="category">

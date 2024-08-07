@@ -9,7 +9,7 @@ const LogoutButton = () => {
 
   return (
     <button id="logout" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-      <LogOutOutline color={'#00000'} height="35px" width="35px"/>    
+      <LogOutOutline color={'#00000'} height="30px" width="30px"/>    
     </button>
   );
 };
