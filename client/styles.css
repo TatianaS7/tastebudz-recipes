@@ -1,0 +1,10 @@
+:root {
+    --accent-color: rgb(168, 97, 230);
+    --margins: 1.5em;
+}
+
+* {
+    /* border: red dotted 1px; */
+    background-color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
