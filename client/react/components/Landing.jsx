@@ -62,7 +62,7 @@ function Landing() {
                         <p className="user">Created by: @monicaluvx3</p>
                     </div>
                     <h4>Chicken Picatta</h4>
-                    <p className="ingredients">Lemon, Capers, Chicken, White Wine</p>
+                    <p className="landing-ingredients">Lemon, Capers, Chicken, White Wine</p>
                     <div className="footer tags">
                         <p>#chicken</p>
                         <p>#dinner</p>
@@ -74,7 +74,7 @@ function Landing() {
                         <p className="user">Created by: @hayley333</p>
                     </div>
                     <h4>Watermelon Feta Salad</h4>
-                    <p className="ingredients">Watermelon, Feta Cheese</p>
+                    <p className="landing-ingredients">Watermelon, Feta Cheese</p>
                     <div className="footer tags">
                         <p>#vegan</p>
                         <p>#light</p>
@@ -87,7 +87,7 @@ function Landing() {
                         <p className="user">Created by: @mike_griffin</p>
                     </div>
                     <h4>Avocado Toast</h4>
-                    <p className="ingredients">Sourdough, Red Pepper Flakes, Avocado, Salt, Pepper</p>
+                    <p className="landing-ingredients">Sourdough, Red Pepper Flakes, Avocado, Salt, Pepper</p>
                     <div className="footer tags">
                         <p>#chicken</p>
                         <p>#dinner</p>
