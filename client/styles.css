@@ -1,6 +1,7 @@
 :root {
     --accent-color: rgb(168, 97, 230);
     --margins: 1.5em;
+    --dark-grey: rgb(93, 93, 93);
 }
 
 * {

@@ -92,7 +92,7 @@ h3 {
 .footer {
     display: flex;
     justify-content: space-evenly;
-    color: rgb(93, 93, 93);
+    color: var(--dark-grey);
     font-weight: bold;
     font-size: 10pt;
 }

@@ -9,8 +9,13 @@ import logo from "../../assets/logo.png";
 
 import { SearchOutline } from 'react-ionicons'
 
-function Navbar() {
+function Navbar({ searchView, setSearchView }) {
     const { isAuthenticated, user } = useAuth0();
+
+    // Search Button Click Handler
+    function handleSearchClick() {
+        setSearchView(!searchView);
+    }
 
     return (
         <nav>
@@ -18,7 +23,7 @@ function Navbar() {
                 <div className="right-align">
                 {isAuthenticated ?
                     <>
-                        <SearchOutline color={'#00000'} height="25px" width="25px" />                
+                        <button id="searchBtn" onClick={handleSearchClick}><SearchOutline color={'#00000'} height="25px" width="25px" /></button>
                         <LogoutButton />
                     </>
                 :

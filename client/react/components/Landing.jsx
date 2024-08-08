@@ -20,7 +20,7 @@ function Landing() {
                 </div>
 
                 <div id="landing-image">
-                    <ListCircleOutline color={'#b6a6c5'} height="370px" width="370px"/>
+                    <ListCircleOutline color={'#ad78de'} height="370px" width="370px"/>
                 </div>
             </div><hr/><br/>
 
