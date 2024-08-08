@@ -5,16 +5,23 @@ import Modal from "react-bootstrap/Modal";
 import "../styles/search.css";
 
 import RecipeCard from "./RecipeCard";
+import GroupCard from "./GroupCard";
 
 
-function Search({ searchView, setSearchView, searchRecipes, searchedRecipes, setSearchedRecipes }) {
+function Search({ searchView, searchRecipes, searchedRecipes, setSearchedRecipes, searchGroups, searchedGroups, setSearchedGroups }) {
     const [query, setQuery] = useState("");
-    const [show, setShow] = useState(false);
     const [searchType, setSearchType] = useState("recipes");
 
     function handleQueryChange(event) {
         setQuery(event.target.value);
     }
+
+    useEffect(() => {
+        query.length > 0 && searchType === 'recipes' ? 
+            searchRecipes(query) : 
+        searchGroups(query);
+    }, [query]);
+
 
     function handleRecipeSearchClick(query) {
         searchRecipes(query);
@@ -25,19 +32,9 @@ function Search({ searchView, setSearchView, searchRecipes, searchedRecipes, set
     }
 
 
-    function handleClose() {
-        setShow(false);
-        setQuery("");
-    }
-
-    useEffect(() => {
-        if (searchView) {
-            setShow(true);
-        }
-    }, [searchView])
-
     function handleSearchTypeChange(type) {
         setSearchType(type);
+        setQuery("");
     }
 
     return (
@@ -59,8 +56,11 @@ function Search({ searchView, setSearchView, searchRecipes, searchedRecipes, set
                 </>
             )}
         </div>
-        {searchedRecipes.length > 0 &&
+        {searchedRecipes.length > 0 && searchType === 'recipes' &&
             <RecipeCard searchedRecipes={searchedRecipes} />
+        }
+        {searchedGroups.length > 0 && searchType === 'groups' &&
+            <GroupCard searchedGroups={searchedGroups} />
         }
         </section>
     );

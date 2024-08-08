@@ -9,3 +9,8 @@
     background-color: whitesmoke;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+section {
+   overflow: hidden;
+   height: 80vh;
+}

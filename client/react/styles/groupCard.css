@@ -1,0 +1,28 @@
+section {
+    overflow: hidden;
+}
+
+#group-results {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2em;
+    gap: 2em;
+}
+.group {
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1.5em;
+    width: 19em;
+    border: var(--accent-color) solid 1px;
+    height: 12em;
+}
+
+.join {
+    text-align: center;
+}
+
+#joinGroup-btn {
+    padding: 0.5em 1em;
+}
