@@ -1,0 +1,59 @@
+#search-results {
+    display: flex;
+    gap: 2em;
+    margin: 1.5em;
+}
+
+.recipe {
+    height: 22em;
+    width: 30em;
+    padding: 15px;
+}
+
+.user {
+    font-size: 9pt;
+    color: var(--dark-grey);
+}
+
+.body {
+    display: flex;
+    justify-content: space-between;
+    overflow: scroll;
+    height: 9em;
+    margin: 0 1em 1em 1em;
+    text-align: left;
+}
+
+.body h4 {
+    font-size: 14pt;
+}
+
+
+.stats {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.time, .servings {
+    display: flex;
+    gap: 0.5em;
+}
+
+.time p, .servings p {
+    margin-top: 0.5em;
+}
+
+.instructions li {
+    font-size: 9pt;
+}
+
+.ingredients li {
+    list-style:square;
+    text-transform: capitalize;
+}
+
+.ingredients {
+    overflow: scroll;
+}
