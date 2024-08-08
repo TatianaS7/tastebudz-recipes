@@ -3,7 +3,7 @@
   "scripts": {
     "client-dev": "parcel client/index.html --open",
     "build": "parcel build client/index.html",
-    "start": "concurrently \"python3 server/app.py\" \"npm run client-dev\""
+    "start": "concurrently \"python3 server/app.py\" \"PORT=3000 npm run client-dev\""
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
