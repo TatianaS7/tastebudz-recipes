@@ -4,15 +4,28 @@ import { useAuth0 } from "@auth0/auth0-react";
 import "../styles/recipeCard.css";
 import { TimeOutline } from 'react-ionicons'
 import { PeopleOutline } from 'react-ionicons'
+import { BookmarkOutline } from 'react-ionicons'
+import { EyeOutline } from 'react-ionicons'
 
 function RecipeCard({ searchedRecipes }) {
+    const { user, isAuthenticated } = useAuth0();
 
     return (
         <div id="search-results">
         {searchedRecipes.map((recipe, index) => {
             return (
                 <div key={index} className="recipe">
-                    <h3>{recipe.name}</h3>
+                    {isAuthenticated ? (
+                        <div className="recipe-header">
+                            <h3>{recipe.name}</h3>
+                            <div className="right-side">
+                                <button className="open-recipe"><EyeOutline color={'#ad78de'} height="25px" width="25px" /></button>
+                                <button id="save-recipe" className="btn btn-outline-dark"><BookmarkOutline color={'#ad78de'} height="25px" width="25px"/></button>
+                            </div>
+                        </div>
+                    ) :
+                        <h3>{recipe.name}</h3>
+                    }
                     <p className="user">Created by: {recipe.user}</p>
                     <div className="stats">
                         {recipe.time && <div className="time"><TimeOutline color={'#ad78de'} height="22px" width="22px"/> <p>{recipe.time} mins</p></div>}

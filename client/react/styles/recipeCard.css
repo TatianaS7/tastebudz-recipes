@@ -1,24 +1,48 @@
 #search-results {
     display: flex;
+    flex-wrap: wrap;
     gap: 2em;
     margin: 1.5em;
+    overflow: auto;
+    height: 100%;
+    padding: 3em 0.5em 8em 0.5em;
 }
 
 .recipe {
-    height: 22em;
-    width: 30em;
+    height: 23em;
+    width: 27em;
     padding: 15px;
 }
 
+.recipe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recipe-header h3 {
+    font-size: 18pt;
+}
+
+.open-recipe, #save-recipe {
+    background: none;
+    border: none;
+}
+
+.right-side {
+    display: flex;
+}
+
 .user {
-    font-size: 9pt;
+    font-size: 8pt;
     color: var(--dark-grey);
+    text-align: left;
 }
 
 .body {
     display: flex;
     justify-content: space-between;
-    overflow: scroll;
+    overflow: auto;
     height: 9em;
     margin: 0 1em 1em 1em;
     text-align: left;
@@ -55,5 +79,11 @@
 }
 
 .ingredients {
-    overflow: scroll;
+    overflow: auto;
+    width: fit-content;
+}
+
+.instructions {
+    overflow: auto;
+    width: fit-content;
 }

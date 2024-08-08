@@ -27,8 +27,8 @@ function Navbar({ searchView, setSearchView }) {
                         <LogoutButton />
                     </>
                 :
-                    <SearchOutline color={'#00000'} height="25px" width="25px" />                
-                }
+                <button id="searchBtn" onClick={handleSearchClick}><SearchOutline color={'#00000'} height="25px" width="25px" /></button>
+            }
                 </div>
 
         </nav>
