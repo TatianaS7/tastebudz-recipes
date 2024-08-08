@@ -4,9 +4,9 @@ section {
 
 #group-results {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 2em;
+    justify-content: space-evenly;
+    margin: 2em 4em;
+    padding: 1em;
     gap: 2em;
 }
 .group {
@@ -14,13 +14,23 @@ section {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 1.5em;
-    width: 19em;
+    width: 23em;
     border: var(--accent-color) solid 1px;
     height: 12em;
 }
 
-.join {
+.admin {
     text-align: center;
+    font-size: 9pt;
+    color: var(--dark-grey);
+}
+
+.join {
+    display: block;
+}
+
+.group-type {
+    font-size: 8pt;
 }
 
 #joinGroup-btn {

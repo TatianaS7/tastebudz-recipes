@@ -1,16 +1,20 @@
-#search-results {
-    display: flex;
+#recipe-results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 2em;
-    margin: 1.5em;
-    overflow: auto;
-    height: 100%;
-    padding: 3em 0.5em 8em 0.5em;
+    margin: 1.5em 7em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 60vh;
+    padding: 3em 0.5em;
 }
 
 .recipe {
     height: 23em;
-    width: 27em;
+    width: 30em;
     padding: 15px;
 }
 
@@ -81,6 +85,9 @@
 .ingredients {
     overflow: auto;
     width: fit-content;
+    font-size: 9pt;
+    padding: 3px;
+    text-wrap: wrap;
 }
 
 .instructions {

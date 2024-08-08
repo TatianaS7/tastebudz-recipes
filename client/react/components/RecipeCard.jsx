@@ -11,7 +11,7 @@ function RecipeCard({ searchedRecipes }) {
     const { user, isAuthenticated } = useAuth0();
 
     return (
-        <div id="search-results">
+        <div id="recipe-results">
         {searchedRecipes.map((recipe, index) => {
             return (
                 <div key={index} className="recipe">

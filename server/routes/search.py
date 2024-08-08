@@ -68,7 +68,9 @@ def search_groups():
             sanitized_group = {
                 "id": group.id,
                 "name": group.name, 
-                "admin": group.admin
+                "admin": group.admin,
+                "is_private": group.is_private,
+                "join_code": group.join_code
             }
             group_data.append(sanitized_group)
         

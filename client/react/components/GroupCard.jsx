@@ -9,21 +9,33 @@ function GroupCard({ searchedGroups }) {
 
     return (
         <div id="group-results">
-        {searchedGroups.map((group, index) => {
+        {searchedGroups && (
+            searchedGroups.map((group, index) => {
             return (
                 <div key={index} className="group">
                     <h3>{group.name}</h3>
-                    <p className="user">Admin: {group.admin}</p>
+                    <p className="admin">Admin: {group.admin}</p>
                         <div className="join">
-                            {isAuthenticated ? 
-                                <button id="joinGroup-btn" className="btn btn-outline-dark">Join Group</button>
-                                :
+                            {isAuthenticated ? (
+                                <>
+                                    <button id="joinGroup-btn" className="btn btn-dark">
+                                        Join Group
+                                    </button>
+                                    <div className="group-type">
+                                        {group.is_private ?
+                                            <p>Join Code Required</p>
+                                        :
+                                            <p>Public Group</p>
+                                        }
+                                    </div>
+                                </>
+                            ) : (
                                 <p>Sign In to Join Group</p>
-                            }
+                            )}
                         </div>
                 </div>
             );
-        })}
+        }))}
     </div>
     )
 }

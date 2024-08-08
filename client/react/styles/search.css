@@ -2,8 +2,13 @@
     display: flex;
     gap: 2em;
     justify-content: center;
+    margin-top: 3em;
 }
 
+#search-buttons button {
+    background: none;
+    border: none;
+}
 #searchbar {
     width: 70%;
     height: 3em;

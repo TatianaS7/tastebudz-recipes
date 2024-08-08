@@ -38,7 +38,7 @@ function Search({ searchView, searchRecipes, searchedRecipes, setSearchedRecipes
     }
 
     return (
-        <section>
+        <content>
         <div id="search-buttons">
             <button id="search-recipe-view" value={'recipes'} onClick={() => handleSearchTypeChange('recipes')}>Search Recipes</button>
             <button id="search-group-view" value={'groups'} onClick={() => handleSearchTypeChange('groups')}>Search Groups</button>
@@ -62,7 +62,7 @@ function Search({ searchView, searchRecipes, searchedRecipes, setSearchedRecipes
         {searchedGroups.length > 0 && searchType === 'groups' &&
             <GroupCard searchedGroups={searchedGroups} />
         }
-        </section>
+        </content>
     );
 }
 

@@ -53,7 +53,9 @@ function App() {
             <Navbar searchView={searchView} setSearchView={setSearchView}/>
             {!isAuthenticated ? 
                 <Landing />
-            : searchView && 
+            : !isAuthenticated && searchView ?
+                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups}/>
+            : isAuthenticated && searchView &&
                 <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups}/>
             }
         </main>
