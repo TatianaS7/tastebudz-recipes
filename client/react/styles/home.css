@@ -1,0 +1,36 @@
+h4 {
+    margin: 1em;
+    font-size: 28pt;
+    font-weight: bolder;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin-top: 2em;
+    /* border: red 1px solid; */
+    width: 15vw;
+}
+
+.action-buttons button {
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 1em;
+    padding: 0.5em 2.5em;
+    color: white;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 3em;
+    height: 65vh;
+    overflow-y: auto;
+}
+
+.feed {
+    width: 70vw;
+    background-color: rgb(216, 216, 216);
+}
+

@@ -8,11 +8,13 @@ import apiURL from "../api"
 import Navbar from "./Navbar";
 import Landing from "./Landing";
 import Search from "./Search";
+import Home from "./Home";
 
 function App() {
     const { isAuthenticated, user } = useAuth0();
 
     const [searchView, setSearchView] = useState(false);
+    const [homeView, setHomeView] = useState(true);
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchedGroups, setSearchedGroups] = useState([]);
 
@@ -50,13 +52,15 @@ function App() {
 
     return (
         <main>
-            <Navbar searchView={searchView} setSearchView={setSearchView}/>
+            <Navbar searchView={searchView} setSearchView={setSearchView} homeView={homeView} setHomeView={setHomeView}/>
             {!isAuthenticated ? 
                 <Landing />
             : !isAuthenticated && searchView ?
                 <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups}/>
-            : isAuthenticated && searchView &&
+            : isAuthenticated && searchView ?
                 <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups}/>
+            : isAuthenticated && homeView &&
+                <Home />
             }
         </main>
     )
