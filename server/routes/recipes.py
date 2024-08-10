@@ -33,21 +33,29 @@ def create_recipe():
         return(str(e))
 
 
-# Get All Recipes
+# Get All Recipes (if public)
 @recipes.route('/all', methods=['GET'])
 def get_all_recipes():
     try:
-        all_recipes = Recipe.query.all()
-        results = [recipe.serialize() for recipe in all_recipes]
+        public_recipes = Recipe.query.filter_by(is_public=True).all()
+        results = [recipe.serialize() for recipe in public_recipes]
         return jsonify(results)
     except Exception as e:
         return(str(e))
 
 # Get All User Recipes
-@recipes.route('/user/<user>', methods=['GET'])
-def get_recipes_by_user(user):
+@recipes.route('/user/all', methods=['POST'])
+def get_recipes_by_user():
     try:
-        user_recipes = Recipe.query.filter_by(user=user).all()
+        data = request.get_json()
+        if 'email' not in data:
+            return jsonify({'error': 'Email is required'})
+        
+        user_recipes = Recipe.query.filter_by(user=data['email']).all()
+
+        if not user_recipes:
+            return jsonify({'error': 'No recipes found for this user'})
+        
         results = [recipe.serialize() for recipe in user_recipes]
         return jsonify(results)
     except Exception as e:

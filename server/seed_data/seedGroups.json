@@ -3,7 +3,7 @@
         "name": "Allison Family",
         "members": [{"email": "charlieallison@yahoo.com", "role": "admin"}],
         "recipes": [],
-        "admin": "charlieallison@yahoo.com",
+        "admin_email": "charlieallison@yahoo.com",
         "join_code": "FG3alZ9",
         "is_private": true
     },
@@ -11,13 +11,13 @@
         "name": "Everything Chicken",
         "members": [{"email": "liz3@gmail.com", "role": "admin"}, {"email": "adriansamuels@yahoo.com", "role": "member"}, {"email": "justinaembers@gmail.com", "role": "member"}],
         "recipes": [],
-        "admin": "liz3@gmail.com"
+        "admin_email": "liz3@gmail.com"
     },
     {
         "name": "The Breakfast Club",
         "members": [{"email": "aliyah_walters@yahoo.com", "role": "admin"}, {"email": "ethanclinton@gmail.com", "role": "member"}, {"email": "jahcoby39@gmail.com", "role": "member"}, {"email": "marywalsh@gmail.com", "role": "member"}],
         "recipes": [],
-        "admin": "aliyah_walters@yahoo.com",
+        "admin_email": "aliyah_walters@yahoo.com",
         "join_code": "A4gh7GD",
         "is_private": true
     }

@@ -15,16 +15,17 @@ def create_app():
     db.init_app(app)
 
     # Import routes
-    from routes import recipes, groups, search, saves
+    from routes import recipes, groups, search, saves, users
 
     # Register Blueprints
+    app.register_blueprint(users, url_prefix='/users')
     app.register_blueprint(recipes, url_prefix='/recipes')
     app.register_blueprint(groups, url_prefix='/groups')
     app.register_blueprint(search, url_prefix='/search')
     app.register_blueprint(saves, url_prefix='/saves')
 
     with app.app_context():
-        # db.drop_all()
+        db.drop_all()
         db.create_all()
         # Seed Data
         seedData()

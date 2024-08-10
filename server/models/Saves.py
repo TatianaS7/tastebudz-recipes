@@ -6,8 +6,8 @@ class Saves(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     creator = db.Column(db.String(100), db.ForeignKey('recipe.user'), nullable=False)
     recipe_id = db.Column(db.String(100), db.ForeignKey('recipe.id'), nullable=False)
-    saved_by = db.Column(db.String(100), nullable=False)
-
+    saved_by = db.Column(db.String(100), db.ForeignKey('user.email'), nullable=False)
+    
     def __init__(self, creator, recipe_id, saved_by):
         self.creator = creator
         self.recipe_id = recipe_id

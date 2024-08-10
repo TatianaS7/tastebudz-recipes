@@ -11,7 +11,7 @@ class Recipe(db.Model):
     time = db.Column(db.Integer, nullable=True)
     image = db.Column(db.String(500), nullable=True)
     tags = db.Column(db.JSON, nullable=False)
-    user = db.Column(db.String(100), nullable=False)
+    user = db.Column(db.String(100), db.ForeignKey('user.email'), nullable=False)
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'), nullable=True)
     is_public = db.Column(db.Boolean, nullable=False, default=True)
 
