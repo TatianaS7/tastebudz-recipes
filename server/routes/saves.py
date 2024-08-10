@@ -128,3 +128,23 @@ def search_saves():
         return jsonify(saves_data), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 400
+    
+
+# Delete a Save
+@saves.route('/<save_id>/delete', methods=['DELETE'])
+def delete_save(save_id):
+    try:
+        data = request.get_json()
+        if not data['saved_by']:
+            return jsonify({'message': 'Please provide a user'}), 400
+        
+        save = Saves.query.filter_by(id=save_id, saved_by=data['saved_by']).first()
+        if not save:
+            return jsonify({'message': 'Save not found'}), 400
+        
+        db.session.delete(save)
+        db.session.commit()
+
+        return jsonify({'message': 'Save deleted successfully!'}), 200
+    except Exception as e:
+        return jsonify({'message': str(e)}), 400
