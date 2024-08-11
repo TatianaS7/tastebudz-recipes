@@ -21,7 +21,7 @@ section {
 
 .admin {
     text-align: center;
-    font-size: 9pt;
+    font-size: 11pt;
     color: var(--dark-grey);
 }
 
@@ -30,7 +30,8 @@ section {
 }
 
 .group-type {
-    font-size: 8pt;
+    padding-top: 8px;
+    font-size: 11pt;
 }
 
 #joinGroup-btn {

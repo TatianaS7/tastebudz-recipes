@@ -16,7 +16,7 @@ def create_group():
     try:
         data = request.get_json()
         
-        if 'name' not in data or 'admin' not in data:
+        if 'name' not in data or 'admin_email' not in data:
             return jsonify({'error': 'Missing required fields'}), 400
         
         # Check if the group name is unique
@@ -36,7 +36,7 @@ def create_group():
                 name=data['name'],
                 members=data.get('members', None),
                 recipes=data.get('recipes', None),
-                admin=data['admin'],
+                admin_email=data['admin_email'],
                 join_code=join_code,
                 is_private=is_private
         )
@@ -65,7 +65,7 @@ def get_group(group_id):
             'name': group.name,
             'members': group.members,
             'recipes': recipes_data,
-            'admin': group.admin,
+            'admin_email': group.admin_email,
             'join_code': group.join_code,
             'is_private': group.is_private
         }
@@ -93,7 +93,7 @@ def get_all_groups():
                 'name': group.name,
                 'members': group.members,
                 'recipes': recipes_data,
-                'admin': group.admin,
+                'admin_email': group.admin_email,
                 'join_code': group.join_code,
                 'is_private': group.is_private
             }
@@ -168,7 +168,7 @@ def delete_group(group_id):
         data = request.get_json()
         if not data or 'email' not in data:
             return jsonify({'error': 'Email is required'})
-        if group.admin == data['email']:
+        if group.admin_email == data['email']:
             db.session.delete(group)
             db.session.commit()
             return jsonify({'message': 'Group deleted'})
@@ -263,7 +263,7 @@ def update_group_recipe(group_id, recipe_id):
             data = request.get_json()
             if not data:
                 return jsonify({'error': 'Missing required fields'})
-            if group_recipe.user == data['email'] or data['email'] == Group.query.get(group_id).admin:
+            if group_recipe.user == data['email'] or data['email'] == Group.query.get(group_id).admin_email:
                 if 'name' in data:
                     group_recipe.name = data['name']
                 if 'ingredients' in data:
@@ -298,7 +298,7 @@ def delete_group_recipe(group_id, recipe_id):
         if not data or 'email' not in data:
             return jsonify({'error': 'Missing required fields'})
         
-        if group_recipe.user == data['email'] or data['email'] == group.admin:
+        if group_recipe.user == data['email'] or data['email'] == group.admin_email:
             db.session.delete(group_recipe)
             db.session.commit()
             return jsonify({'message': 'Recipe deleted'})

@@ -14,7 +14,7 @@ function GroupCard({ searchedGroups }) {
             return (
                 <div key={index} className="group">
                     <h3>{group.name}</h3>
-                    <p className="admin">Admin: {group.admin}</p>
+                    <p className="admin">Admin: {group.admin_email}</p>
                         <div className="join">
                             {isAuthenticated ? (
                                 <>
