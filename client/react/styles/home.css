@@ -1,16 +1,17 @@
-h4 {
+#welcome {
     margin: 1em;
     font-size: 28pt;
-    font-weight: bolder;
+    font-weight: lighter;
 }
 
 .action-buttons {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 2em;
-    margin-top: 2em;
-    /* border: red 1px solid; */
-    width: 15vw;
+    width: 17vw;
+    padding: 1em 2em 1em 1em;
+    border-right: solid 1px var(--accent-color);
 }
 
 .action-buttons button {
@@ -31,6 +32,14 @@ h4 {
 
 .feed {
     width: 70vw;
-    background-color: rgb(216, 216, 216);
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.page-view h5 {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-left: 3em;
+    margin-bottom: 0.5em;
 }
 
