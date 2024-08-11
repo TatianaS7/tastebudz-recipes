@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import axios from "axios";
@@ -15,8 +15,33 @@ function App() {
 
     const [searchView, setSearchView] = useState(false);
     const [homeView, setHomeView] = useState(true);
+    const [defaultView, setDefaultView] = useState(true);
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchedGroups, setSearchedGroups] = useState([]);
+    const [userData, setUserData] = useState([]);
+
+
+    // Fetch User
+    async function fetchUser(user) {
+        try {
+            if (isAuthenticated) {
+                const res = await axios.post(`${apiURL}/users/`, {
+                    email: user.email
+                });
+                console.log(res.data);
+                const data = res.data;
+                setUserData(data);
+            }
+        } catch (error) {
+        console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            fetchUser(user);
+        }
+    }, [isAuthenticated]);
 
     // Search Recipes Function
     async function searchRecipes(query) {
@@ -42,7 +67,6 @@ function App() {
                     query: query
                 }
             });
-            console.log(res.data);
             const data = res.data;
             setSearchedGroups(data);
         } catch (error) {
@@ -52,7 +76,7 @@ function App() {
 
     return (
         <main>
-            <Navbar searchView={searchView} setSearchView={setSearchView} homeView={homeView} setHomeView={setHomeView}/>
+            <Navbar searchView={searchView} setSearchView={setSearchView} homeView={homeView} setHomeView={setHomeView} defaultView={defaultView} setDefaultView={setDefaultView}/>
             {!isAuthenticated ? 
                 <Landing />
             : !isAuthenticated && searchView ?
@@ -60,7 +84,7 @@ function App() {
             : isAuthenticated && searchView ?
                 <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups}/>
             : isAuthenticated && homeView &&
-                <Home />
+                <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView}/>
             }
         </main>
     )

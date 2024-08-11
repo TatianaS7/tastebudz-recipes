@@ -7,23 +7,27 @@ import axios from "axios";
 import apiURL from "../api"
 
 import RecipeCard from "./RecipeCard";
+import JoinGroup from "./JoinGroup";
 
 
 
-function Home() {
+function Home({ userData, defaultView, setDefaultView, setSearchView }) {
     const { user } = useAuth0();
-    const [defaultView, setDefaultView] = useState(true);
-    const [recipesView, setRecipesView] = useState(false);
+    const [myRecipesView, setMyRecipesView] = useState(false);
     const [allRecipes, setAllRecipes] = useState([]);
-    const [myRecipes, setMyRecipes] = useState([]);
+
+    const [joinGroupView, setJoinGroupView] = useState(false);
+    const [myGroupsView, setMyGroupsView] = useState(false);
+    
+    const myRecipes = userData.created_recipes;
+    // const mySaves = userData.saved_recipes;
+    const myGroups = userData.groups;
 
 
-    console.log(user);
-
+    // Fetch All Public Recipes
     async function getAllRecipes() {
         try {
             const res = await axios.get(`${apiURL}/recipes/all`);
-            console.log(res.data);
             const data = res.data;
             setAllRecipes(data);
         } catch (error) {
@@ -37,6 +41,29 @@ function Home() {
         }
     }, [defaultView]);
 
+    // Toggle My Recipes View
+    function toggleMyRecipes() {
+        setDefaultView(false);
+        setMyRecipesView(true);
+        console.log(myRecipes);
+    }
+
+    // Toggle Join Group View
+    function toggleJoinGroup() {
+        setJoinGroupView(true);
+        setDefaultView(false);
+        setMyRecipesView(false);
+        console.log(joinGroupView);
+    }
+
+    // Toggle My Groups View
+    function toggleMyGroups() {
+        setMyGroupsView(true);
+        setDefaultView(false);
+        setMyRecipesView(false);
+        setJoinGroupView(false);
+        console.log(myGroups);
+    }
 
     return (
         <section>
@@ -44,25 +71,41 @@ function Home() {
 
             <div className="flex-container">
                 <div className="action-buttons">
-                    <button id="create-recipe">Create Recipe</button><hr/>
-                    <button id="create-group">Create Group</button>
-                    <button id="join-group">Join Group</button>
+                    <button id="public-recipes" onClick={() => setDefaultView(true)}>Home</button><hr/>
+                    <button id="create-recipe">Create a Recipe</button><hr/>
+                    <button id="create-group">Create a Group</button>
+                    <button id="join-group" onClick={toggleJoinGroup}>Join a Group</button>
                     <hr/>
-                    <button id="my-recipes">My Recipes</button>
-                    <button id="my-groups">My Groups</button>
+                    <button id="my-recipes" onClick={toggleMyRecipes}>My Recipes</button>
+                    <button id="my-groups" onClick={toggleMyGroups}>My Groups</button>
                 </div>
 
                 <div id="content">
                     <div className="page-view">
-                        {defaultView && (
+                        {defaultView ? (
                             <h5>All Recipes</h5>
+                        ) : myRecipesView ? (
+                            <h5>My Recipes</h5>
+                        ) : myGroupsView && (
+                            <h5>My Groups</h5>
                         )}
                     </div>
                     <div className="feed">
-                        {defaultView && (
+                        {defaultView ? (
                             <>
                                 <RecipeCard allRecipes={allRecipes} defaultView={defaultView}/>                      
                             </>
+                        ) :
+                        myRecipesView ? (
+                            <>
+                                {myRecipes.length === 0 && (
+                                    <p>No recipes created yet!</p>
+                                )}
+                                <RecipeCard myRecipes={myRecipes} myRecipesView={myRecipesView}/>
+                            </>
+                        ) :
+                        joinGroupView && (
+                            <JoinGroup userData={userData} setSearchView={setSearchView} joinGroupView={joinGroupView} setMyGroupsView={setMyGroupsView}/>
                         )}
                     
                     </div>

@@ -1,0 +1,16 @@
+#join-form {
+    text-align: center;
+    padding: 1em;
+}
+
+#join-code-input {
+    border-radius: 7px;
+    padding: 8px;
+}
+
+#join-code {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    margin-top: 1em;
+}
