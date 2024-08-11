@@ -74,15 +74,25 @@ function App() {
         }
     }
 
+    // Join Group Function
+    async function joinGroup(user, groupCode, group_id) {
+        try {
+            const res = await axios.put(`${apiURL}/groups/join/${group_id}`, {
+                email: user.email,
+                join_code: groupCode
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <main>
             <Navbar searchView={searchView} setSearchView={setSearchView} homeView={homeView} setHomeView={setHomeView} defaultView={defaultView} setDefaultView={setDefaultView}/>
             {!isAuthenticated ? 
                 <Landing />
-            : !isAuthenticated && searchView ?
-                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups}/>
-            : isAuthenticated && searchView ?
-                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups}/>
+            : searchView ?
+                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup}/>
             : isAuthenticated && homeView &&
                 <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView}/>
             }

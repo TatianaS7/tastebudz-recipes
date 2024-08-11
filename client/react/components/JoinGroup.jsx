@@ -5,23 +5,25 @@ import { Modal } from "react-bootstrap";
 import "../styles/joinGroup.css";
 
 
-function JoinGroup({ userData, setSearchView, JoinGroupView, setMyGroupsView }) {
+function JoinGroup({ userData, setSearchView, joinGroup, currGroup, setShow, show }) {
     const { user } = useAuth0();
-    const [show, setShow] = useState(false);
 
-    useEffect(() => {
-        setShow(true);
-    }, [JoinGroupView]);
 
     // Close Modal
     function handleClose() {
         setShow(false);
-        setMyGroupsView(true);
+    }
+
+    // Handle Join Form Submit
+    function handleJoinSubmit(event) {
+        event.preventDefault();
+        const groupCode = document.getElementById("join-code-input").value;
+        joinGroup(user, groupCode, currGroup.id);
     }
 
     return (
-        <>
-            <Modal show={show} onHide={handleClose}>
+        <div id="join-group-modal">
+            <Modal show={show} onHide={handleClose} backdrop="static" style={{background: "transparent"}}>
                 <Modal.Header closeButton>
                     <Modal.Title>Join a Group</Modal.Title>
                 </Modal.Header>
@@ -29,8 +31,8 @@ function JoinGroup({ userData, setSearchView, JoinGroupView, setMyGroupsView }) 
                     <form id="join-form">
                         <p>Have a Join Code? Enter it here!</p>
                         <div id="join-code">
-                            <input id="join-code-input" type="text" placeholder="ABC1234"></input>
-                            <button className="btn btn-dark" type="submit">Join Group</button><br/>
+                            <input autoFocus id="join-code-input" type="text" placeholder="ABC1234"></input>
+                            <button className="btn btn-dark" type="submit" onClick={handleJoinSubmit}>Join Group</button><br/>
                         </div><br/>
 
                         <div id="browse-groups">
@@ -40,7 +42,7 @@ function JoinGroup({ userData, setSearchView, JoinGroupView, setMyGroupsView }) 
                     </form>
                 </Modal.Body>
             </Modal>
-        </>
+        </div>
     )
 }
 

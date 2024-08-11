@@ -3,11 +3,31 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import "../styles/groupCard.css";
 
+import JoinGroup from "./JoinGroup";
 
-function GroupCard({ searchedGroups }) {
+
+function GroupCard({ searchedGroups, JoinGroupView, setMyGroupsView, joinGroup }) {
     const { user, isAuthenticated } = useAuth0();
+    const [show, setShow] = useState(false);
+    const [joinGroupView, setJoinGroupView] = useState(false);
+    const [currGroup, setCurrGroup] = useState([]);
+
+
+    // Toggle Join Group View
+    function toggleJoinGroup(group) {
+        setShow(true);
+        setCurrGroup(group);
+        console.log(currGroup);
+        console.log(joinGroupView);
+    }    
+
 
     return (
+        <>
+        {setShow &&
+            <JoinGroup joinGroup={joinGroup} currGroup={currGroup} setShow={setShow} show={show} />
+        }
+
         <div id="group-results">
         {searchedGroups && (
             searchedGroups.map((group, index) => {
@@ -18,7 +38,7 @@ function GroupCard({ searchedGroups }) {
                         <div className="join">
                             {isAuthenticated ? (
                                 <>
-                                    <button id="joinGroup-btn" className="btn btn-dark">
+                                    <button id="joinGroup-btn" className="btn btn-dark" onClick={() => toggleJoinGroup(group)}>
                                         Join Group
                                     </button>
                                     <div className="group-type">
@@ -37,6 +57,8 @@ function GroupCard({ searchedGroups }) {
             );
         }))}
     </div>
+        
+        </>
     )
 }
 
