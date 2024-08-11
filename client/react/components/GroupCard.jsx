@@ -6,7 +6,7 @@ import "../styles/groupCard.css";
 import JoinGroup from "./JoinGroup";
 
 
-function GroupCard({ searchedGroups, JoinGroupView, setMyGroupsView, joinGroup }) {
+function GroupCard({ searchedGroups, JoinGroupView, joinGroup, myGroups, myGroupsView }) {
     const { user, isAuthenticated } = useAuth0();
     const [show, setShow] = useState(false);
     const [joinGroupView, setJoinGroupView] = useState(false);
@@ -15,21 +15,27 @@ function GroupCard({ searchedGroups, JoinGroupView, setMyGroupsView, joinGroup }
 
     // Toggle Join Group View
     function toggleJoinGroup(group) {
-        setShow(true);
         setCurrGroup(group);
+        {group.is_private ?
+            setShow(true) 
+        :
+            joinGroup(user, null, group.id);
+        }
         console.log(currGroup);
         console.log(joinGroupView);
     }    
+
+    // Fetch Group Data
 
 
     return (
         <>
         {setShow &&
-            <JoinGroup joinGroup={joinGroup} currGroup={currGroup} setShow={setShow} show={show} />
+            <JoinGroup joinGroup={joinGroup} currGroup={currGroup} setShow={setShow} show={show} myGroupsView={myGroupsView} />
         }
 
         <div id="group-results">
-        {searchedGroups && (
+        {searchedGroups ? (
             searchedGroups.map((group, index) => {
             return (
                 <div key={index} className="group">
@@ -55,7 +61,20 @@ function GroupCard({ searchedGroups, JoinGroupView, setMyGroupsView, joinGroup }
                         </div>
                 </div>
             );
-        }))}
+        })) : 
+            myGroupsView && (myGroups.map((group, index) => {
+                return (
+                    <>
+                        <div key={index} className="group">
+                            <h3>{group.name}</h3>
+                            <p className="admin">Admin: {group.admin_email}</p>
+
+                            <button id="viewGroup-btn" className="btn btn-dark">View Group</button>                    
+                        </div>
+                    </>
+                );
+            })    
+        )}
     </div>
         
         </>

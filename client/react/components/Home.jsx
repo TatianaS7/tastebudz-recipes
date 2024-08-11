@@ -8,6 +8,7 @@ import apiURL from "../api"
 
 import RecipeCard from "./RecipeCard";
 import JoinGroup from "./JoinGroup";
+import GroupCard from "./GroupCard";
 
 
 
@@ -47,20 +48,12 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
         console.log(myRecipes);
     }
 
-    // // Toggle Join Group View
-    // function toggleJoinGroup() {
-    //     setJoinGroupView(true);
-    //     setDefaultView(false);
-    //     setMyRecipesView(false);
-    //     console.log(joinGroupView);
-    // }
 
     // Toggle My Groups View
     function toggleMyGroups() {
         setMyGroupsView(true);
         setDefaultView(false);
         setMyRecipesView(false);
-        setJoinGroupView(false);
         console.log(myGroups);
     }
 
@@ -73,7 +66,6 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
                     <button id="public-recipes" onClick={() => setDefaultView(true)}>Home</button><hr/>
                     <button id="create-recipe">Create a Recipe</button>
                     <button id="create-group">Create a Group</button>
-                    {/* <button id="join-group" onClick={toggleJoinGroup}>Join a Group</button> */}
                     <hr/>
                     <button id="my-recipes" onClick={toggleMyRecipes}>My Recipes</button>
                     <button id="my-groups" onClick={toggleMyGroups}>My Groups</button>
@@ -97,25 +89,21 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
                         ) :
                         myRecipesView ? (
                             <>
-                                {myRecipes.length === 0 && (
+                                {myRecipes && myRecipes.length === 0 && (
                                 <div className="empty-message">
                                     <p>No recipes created yet!</p>
                                 </div>
                                 )}
                                 <RecipeCard myRecipes={myRecipes} myRecipesView={myRecipesView}/>
                             </>
-                        // ) :
-                        // joinGroupView ? (
-                        //     <>
-                        //         <JoinGroup userData={userData} setSearchView={setSearchView} joinGroupView={joinGroupView} setMyGroupsView={setMyGroupsView}/>                            
-                        //     </>
                         ) : myGroupsView && (
                             <>
-                                {myGroups.length === 0 && (
+                                {myGroups && myGroups.length === 0 && (
                                     <div className="empty-message">
                                         <p>No groups joined yet!</p>
                                     </div>
-                                )}  
+                                )}
+                                <GroupCard myGroups={myGroups} myGroupsView={myGroupsView} />  
                             </>  
                         )}
                     </div>
