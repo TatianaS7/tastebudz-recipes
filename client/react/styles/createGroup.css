@@ -1,0 +1,8 @@
+#create-group-form input {
+    padding: 0.5em;
+    border-radius: 8px;
+}
+
+.error {
+    color: red;
+}

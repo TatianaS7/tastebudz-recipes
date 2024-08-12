@@ -7,21 +7,23 @@ import axios from "axios";
 import apiURL from "../api"
 
 import RecipeCard from "./RecipeCard";
-import JoinGroup from "./JoinGroup";
 import GroupCard from "./GroupCard";
+import CreateGroup from "./CreateGroup";
 
 
 
-function Home({ userData, defaultView, setDefaultView, setSearchView }) {
+function Home({ userData, defaultView, setDefaultView, fetchUser }) {
     const { user } = useAuth0();
     const [myRecipesView, setMyRecipesView] = useState(false);
     const [allRecipes, setAllRecipes] = useState([]);
 
     const [myGroupsView, setMyGroupsView] = useState(false);
+    const [mySavesView, setMySavesView] = useState(false);
+    const [createGroupView, setCreateGroupView] = useState(false);
     
     const myRecipes = userData.created_recipes;
-    // const mySaves = userData.saved_recipes;
     const myGroups = userData.groups;
+    const mySaves = userData.saved_recipes;
 
 
     // Fetch All Public Recipes
@@ -40,11 +42,13 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
             getAllRecipes();
         }
     }, [defaultView]);
+    
 
     // Toggle My Recipes View
     function toggleMyRecipes() {
         setDefaultView(false);
         setMyRecipesView(true);
+        setCreateGroupView(false);
         console.log(myRecipes);
     }
 
@@ -54,7 +58,25 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
         setMyGroupsView(true);
         setDefaultView(false);
         setMyRecipesView(false);
-        console.log(myGroups);
+        setCreateGroupView(false);
+    }
+
+    // Toggle My Saves View
+    function toggleMySaves() {
+        setMySavesView(true);
+        setDefaultView(false);
+        setMyRecipesView(false);
+        setMyGroupsView(false);
+        setCreateGroupView(false);
+    }
+
+    // Toggle Create Group View
+    function toggleCreateGroup() {
+        setCreateGroupView(true);
+        setDefaultView(false);
+        setMyRecipesView(false);
+        setMyGroupsView(false);
+        setMySavesView(false);
     }
 
     return (
@@ -65,20 +87,25 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
                 <div className="action-buttons">
                     <button id="public-recipes" onClick={() => setDefaultView(true)}>Home</button><hr/>
                     <button id="create-recipe">Create a Recipe</button>
-                    <button id="create-group">Create a Group</button>
+                    <button id="create-group" onClick={toggleCreateGroup}>Create a Group</button>
                     <hr/>
                     <button id="my-recipes" onClick={toggleMyRecipes}>My Recipes</button>
                     <button id="my-groups" onClick={toggleMyGroups}>My Groups</button>
+                    <button id="my-saved" onClick={toggleMySaves}>My Saves</button>
                 </div>
 
                 <div id="content">
                     <div className="page-view">
                         {defaultView ? (
                             <h5>All Recipes</h5>
+                        ) : createGroupView ? (
+                            <h5>Create a Group</h5>
                         ) : myRecipesView ? (
                             <h5>My Recipes</h5>
-                        ) : myGroupsView && (
+                        ) : myGroupsView ? (
                             <h5>My Groups</h5>
+                        ) : mySavesView && (
+                            <h5>My Saves</h5>
                         )}
                     </div>
                     <div className="feed">
@@ -86,8 +113,11 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
                             <>
                                 <RecipeCard allRecipes={allRecipes} defaultView={defaultView}/>                      
                             </>
-                        ) :
-                        myRecipesView ? (
+                        ) : createGroupView ? (
+                            <>
+                                <CreateGroup userData={userData} fetchUser={fetchUser} toggleMyGroups={toggleMyGroups}/>
+                            </>
+                        ) : myRecipesView ? (
                             <>
                                 {myRecipes && myRecipes.length === 0 && (
                                 <div className="empty-message">
@@ -96,7 +126,7 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
                                 )}
                                 <RecipeCard myRecipes={myRecipes} myRecipesView={myRecipesView}/>
                             </>
-                        ) : myGroupsView && (
+                        ) : myGroupsView ? (
                             <>
                                 {myGroups && myGroups.length === 0 && (
                                     <div className="empty-message">
@@ -105,6 +135,15 @@ function Home({ userData, defaultView, setDefaultView, setSearchView }) {
                                 )}
                                 <GroupCard myGroups={myGroups} myGroupsView={myGroupsView} />  
                             </>  
+                        ) : mySavesView && (
+                            <>
+                                {mySaves && mySaves.length === 0 && (
+                                    <div className="empty-message">
+                                        <p>No recipes saved yet!</p>
+                                    </div>
+                                )}
+                                <RecipeCard mySaves={mySaves} mySavesView={mySavesView} />
+                            </>   
                         )}
                     </div>
                 </div>

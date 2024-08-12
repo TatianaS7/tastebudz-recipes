@@ -20,6 +20,7 @@ function GroupCard({ searchedGroups, JoinGroupView, joinGroup, myGroups, myGroup
             setShow(true) 
         :
             joinGroup(user, null, group.id);
+            setCurrGroup([]);
         }
         console.log(currGroup);
         console.log(joinGroupView);
@@ -34,7 +35,7 @@ function GroupCard({ searchedGroups, JoinGroupView, joinGroup, myGroups, myGroup
             <JoinGroup joinGroup={joinGroup} currGroup={currGroup} setShow={setShow} show={show} myGroupsView={myGroupsView} />
         }
 
-        <div id="group-results">
+        <div id={myGroupsView ? "my-group-results" : "group-results"}>
         {searchedGroups ? (
             searchedGroups.map((group, index) => {
             return (

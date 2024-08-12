@@ -38,7 +38,7 @@ def get_user():
                         'admin_email': group.admin_email,
                         'is_private': group.is_private
                     }
-                    user.groups.append(serialized_group)
+                    user.groups.insert(0, serialized_group)
                     break
 
         return jsonify(user.serialize()), 200

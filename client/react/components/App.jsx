@@ -16,6 +16,7 @@ function App() {
     const [searchView, setSearchView] = useState(false);
     const [homeView, setHomeView] = useState(true);
     const [defaultView, setDefaultView] = useState(true);
+
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchedGroups, setSearchedGroups] = useState([]);
     const [userData, setUserData] = useState([]);
@@ -28,7 +29,7 @@ function App() {
                 const res = await axios.post(`${apiURL}/users/`, {
                     email: user.email
                 });
-                console.log(res.data);
+                // console.log(res.data);
                 const data = res.data;
                 setUserData(data);
             }
@@ -94,7 +95,7 @@ function App() {
             : searchView ?
                 <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup}/>
             : isAuthenticated && homeView &&
-                <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView}/>
+                <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser}/>
             }
         </main>
     )
