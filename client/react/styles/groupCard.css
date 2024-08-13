@@ -17,6 +17,10 @@ section {
     justify-content: space-between;
     padding: 2em;
 }
+
+#my-group-results .group {
+    width: 28em;
+}
 .group {
     text-align: center;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

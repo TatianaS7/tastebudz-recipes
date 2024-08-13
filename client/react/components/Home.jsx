@@ -133,7 +133,7 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                                         <p>No groups joined yet!</p>
                                     </div>
                                 )}
-                                <GroupCard myGroups={myGroups} myGroupsView={myGroupsView} />  
+                                <GroupCard myGroups={myGroups} myGroupsView={myGroupsView} toggleMyGroups={toggleMyGroups} />  
                             </>  
                         ) : mySavesView && (
                             <>

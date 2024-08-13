@@ -1,0 +1,42 @@
+.modal.show .modal-dialog {
+    border-radius: 8px;
+    margin-top: 4em
+}
+
+#search-group-recipes {
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.search-recipes {
+    display: flex;
+    gap: 0.5em;
+}
+
+#add-recipe-btn {
+    background-color: var(--accent-color);
+    border: none;
+    padding: 0.5em 2em;
+}
+
+#search-group-btn {
+    background: none;
+    border: none;
+}
+
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 1.5em;
+}
+
+.group-header h2 {
+    text-align: left;
+}
+
+.group-recipes {
+    overflow-y: auto;
+    height: 18em;
+    background: darkgray;
+}
