@@ -6,6 +6,7 @@ import "../styles/home.css";
 import axios from "axios";
 import apiURL from "../api"
 
+import RecipeCardWrapper from "./RecipeCardWrapper";
 import RecipeCard from "./RecipeCard";
 import GroupCard from "./GroupCard";
 import CreateGroup from "./CreateGroup";
@@ -111,7 +112,8 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                     <div className="feed">
                         {defaultView ? (
                             <>
-                                <RecipeCard allRecipes={allRecipes} defaultView={defaultView}/>                      
+                                <RecipeCardWrapper allRecipes={allRecipes} defaultView={defaultView}/>
+                                {/* <RecipeCard allRecipes={allRecipes} defaultView={defaultView}/>                       */}
                             </>
                         ) : createGroupView ? (
                             <>
@@ -124,7 +126,8 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                                     <p>No recipes created yet!</p>
                                 </div>
                                 )}
-                                <RecipeCard myRecipes={myRecipes} myRecipesView={myRecipesView}/>
+                                <RecipeCardWrapper myRecipes={myRecipes} myRecipesView={myRecipesView}/>
+                                {/* <RecipeCard myRecipes={myRecipes} myRecipesView={myRecipesView}/> */}
                             </>
                         ) : myGroupsView ? (
                             <>
@@ -142,7 +145,8 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                                         <p>No recipes saved yet!</p>
                                     </div>
                                 )}
-                                <RecipeCard mySaves={mySaves} mySavesView={mySavesView} />
+                                <RecipeCardWrapper mySaves={mySaves} mySavesView={mySavesView}/>
+                                {/* <RecipeCard mySaves={mySaves} mySavesView={mySavesView} /> */}
                             </>   
                         )}
                     </div>

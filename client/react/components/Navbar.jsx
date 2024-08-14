@@ -10,13 +10,20 @@ import logo from "../../assets/logo.png";
 import { SearchOutline } from 'react-ionicons'
 import { HomeOutline } from 'react-ionicons'
 
-function Navbar({ searchView, setSearchView, homeView, setHomeView, defaultView, setDefaultView }) {
+function Navbar({ searchView, setSearchView, homeView, setHomeView, defaultView, setDefaultView, landingView, setLandingView }) {
     const { isAuthenticated, user } = useAuth0();
 
     // Search Button Click Handler
     function handleSearchClick() {
-        setSearchView(!searchView);
-        setHomeView(!homeView);
+        // setSearchView(!searchView);
+        // setHomeView(!homeView);
+        if (isAuthenticated) {
+            setSearchView(!searchView);
+            setHomeView(!homeView);
+        } else {
+            setLandingView(!landingView);
+            setSearchView(true);
+        }
     }
 
     function handleHomeClick() {
@@ -34,16 +41,11 @@ function Navbar({ searchView, setSearchView, homeView, setHomeView, defaultView,
                 }
             </div>
                 <div className="right-align">
-                {isAuthenticated ?
-                    <>
-                        <button id="searchBtn" onClick={handleSearchClick}><SearchOutline color={'#00000'} height="25px" width="25px" /></button>
+                    <button id="searchBtn" onClick={handleSearchClick}><SearchOutline color={'#00000'} height="25px" width="25px" /></button>
+                    {isAuthenticated &&
                         <LogoutButton />
-                    </>
-                :
-                <button id="searchBtn" onClick={handleSearchClick}><SearchOutline color={'#00000'} height="25px" width="25px" /></button>
-            }
+                    }
                 </div>
-
         </nav>
     )
 }

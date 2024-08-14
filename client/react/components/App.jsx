@@ -16,6 +16,7 @@ function App() {
     const [searchView, setSearchView] = useState(false);
     const [homeView, setHomeView] = useState(true);
     const [defaultView, setDefaultView] = useState(true);
+    const [landingView, setLandingView] = useState(true);
 
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchedGroups, setSearchedGroups] = useState([]);
@@ -89,10 +90,12 @@ function App() {
 
     return (
         <main>
-            <Navbar searchView={searchView} setSearchView={setSearchView} homeView={homeView} setHomeView={setHomeView} defaultView={defaultView} setDefaultView={setDefaultView}/>
-            {!isAuthenticated ? 
+            <Navbar searchView={searchView} setSearchView={setSearchView} landingView={landingView} setLandingView={setLandingView} homeView={homeView} setHomeView={setHomeView} defaultView={defaultView} setDefaultView={setDefaultView}/>
+            {!isAuthenticated && landingView &&
                 <Landing />
-            : searchView ?
+            }
+
+            {isAuthenticated && searchView || !isAuthenticated && searchView ?
                 <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup}/>
             : isAuthenticated && homeView &&
                 <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser}/>

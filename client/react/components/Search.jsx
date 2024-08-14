@@ -4,11 +4,12 @@ import Modal from "react-bootstrap/Modal";
 
 import "../styles/search.css";
 
-import RecipeCard from "./RecipeCard";
+import RecipeCardWrapper from "./RecipeCardWrapper";
+// import RecipeCard from "./RecipeCard";
 import GroupCard from "./GroupCard";
 
 
-function Search({ searchView, searchRecipes, searchedRecipes, setSearchedRecipes, searchGroups, searchedGroups, setSearchedGroups, joinGroup }) {
+function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, joinGroup }) {
     const [query, setQuery] = useState("");
     const [searchType, setSearchType] = useState("recipes");
 
@@ -57,7 +58,8 @@ function Search({ searchView, searchRecipes, searchedRecipes, setSearchedRecipes
             )}
         </div>
         {searchedRecipes.length > 0 && searchType === 'recipes' &&
-            <RecipeCard searchedRecipes={searchedRecipes} />
+            // <RecipeCard searchedRecipes={searchedRecipes} />
+            <RecipeCardWrapper searchedRecipes={searchedRecipes} />
         }
         {searchedGroups.length > 0 && searchType === 'groups' &&
             <GroupCard searchedGroups={searchedGroups} joinGroup={joinGroup}/>

@@ -39,6 +39,11 @@
     padding: 15px;
 }
 
+#recipe-results .recipe.recipe-header {
+    text-align: left;
+
+}
+
 .recipe-header {
     display: flex;
     justify-content: space-between;
