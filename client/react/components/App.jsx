@@ -91,13 +91,13 @@ function App() {
 
     return (
         <main>
-            <Navbar searchView={searchView} setSearchView={setSearchView} landingView={landingView} setLandingView={setLandingView} homeView={homeView} setHomeView={setHomeView} defaultView={defaultView} setDefaultView={setDefaultView}/>
+            <Navbar searchView={searchView} setSearchView={setSearchView} landingView={landingView} setLandingView={setLandingView} homeView={homeView} setHomeView={setHomeView} defaultView={defaultView} setDefaultView={setDefaultView} fetchUser={fetchUser}/>
             {!isAuthenticated && landingView &&
                 <Landing />
             }
 
             {isAuthenticated && searchView || !isAuthenticated && searchView ?
-                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup} setHomeView={setHomeView}/>
+                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup} setHomeView={setHomeView} homeView={homeView} fetchUser={fetchUser}/>
             : isAuthenticated && homeView &&
                 <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser}/>
             }

@@ -10,7 +10,7 @@ import apiURL from "../api";
 
 import RecipeCardWrapper from "./RecipeCardWrapper";
 
-function GroupDetails({ groupData, expandGroupView, setExpandGroupView }) {
+function GroupDetails({ groupData, expandGroupView, setExpandGroupView, toggleMyGroups, fetchUser, fetchGroup, leaveGroup }) {
   const { user } = useAuth0();
   const [showDetails, setShowDetails] = useState(false);
 
@@ -27,6 +27,13 @@ function GroupDetails({ groupData, expandGroupView, setExpandGroupView }) {
     setExpandGroupView(false);
   }
 
+  // Handle Leave Group Click
+  async function handleLeaveGroupClick() {
+    await leaveGroup(groupData);
+    closeDetails();
+    await fetchUser(user);
+  }
+
 
   return (
       <Modal show={toggleDetails} onHide={closeDetails} size="xl" centered style={{background: "none", height: 'fit-content'}}>
@@ -38,10 +45,10 @@ function GroupDetails({ groupData, expandGroupView, setExpandGroupView }) {
             {groupData.admin_email === user.email ? (
               <div style={{display: "flex", gap: '1em'}}>
                 <button className="btn btn-dark">Edit Group</button>
-                <button className="btn btn-dark">Delete Group</button>
+                <button className="btn btn-danger">Delete Group</button>
               </div>
             ) : (
-              <button className="btn btn-outline-danger">Leave Group</button>
+              <button className="btn btn-outline-danger" onClick={handleLeaveGroupClick}>Leave Group</button>
             )}
           </div>
         </Modal.Header>
@@ -68,13 +75,11 @@ function GroupDetails({ groupData, expandGroupView, setExpandGroupView }) {
           </div>
                 
                 <div className="group-recipes">
-                    {groupData ? (
+                    {groupData && Array.isArray(groupData.recipes) && groupData.recipes.length > 0 ? (
                       <RecipeCardWrapper groupRecipes={groupData.recipes} expandGroupView={expandGroupView}/>
-                    ) : (
-                        <>
+                    ) : groupData && Array.isArray(groupData.recipes) && groupData.recipes.length === 0 ? (
                             <p>No Recipes Added!</p>
-                        </>
-                    )}
+                    ) : null }
                 </div>
         </Modal.Body>
         <Modal.Footer style={{justifyContent: 'space-between'}}>

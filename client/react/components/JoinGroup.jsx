@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap";
 import "../styles/joinGroup.css";
 
 
-function JoinGroup({ setSearchView, joinGroup, currGroup, setShow, show, setMyGroupsView, toggleMyGroups, setHomeView }) {
+function JoinGroup({ joinGroup, currGroup, setShow, show, fetchUser, checkMembership }) {
     const { user } = useAuth0();
 
 
@@ -15,14 +15,20 @@ function JoinGroup({ setSearchView, joinGroup, currGroup, setShow, show, setMyGr
     }
 
     // Handle Join Form Submit
-    function handleJoinSubmit(event) {
-        event.preventDefault();
-        const groupCode = document.getElementById("join-code-input").value;
-        joinGroup(user, groupCode, currGroup.id);
+    async function handleJoinSubmit(event) {
+      event.preventDefault();
+      const groupCode = document.getElementById("join-code-input").value;
+      const joinCodeError = document.getElementById("join-code-error");
+
+      try {
+        await joinGroup(user, groupCode, currGroup.id);
+
         setShow(false);
-        // setHomeView(true);
-        // setMyGroupsView(true);
-        // toggleMyGroups();
+        await fetchUser(user);
+        await checkMembership(currGroup);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     return (
@@ -33,15 +39,13 @@ function JoinGroup({ setSearchView, joinGroup, currGroup, setShow, show, setMyGr
                 </Modal.Header>
                 <Modal.Body>
                     <form id="join-form">
-                        <p>Have a Join Code? Enter it here!</p>
+                        <p>Enter Join Code</p>
                         <div id="join-code">
                             <input autoFocus id="join-code-input" type="text" placeholder="ABC1234"></input>
                             <button className="btn btn-dark" type="submit" onClick={handleJoinSubmit}>Join Group</button><br/>
                         </div><br/>
-
-                        <div id="browse-groups">
-                            <p>Not sure?</p>
-                            <button className="btn btn-outline-dark" onClick={() => setSearchView(true)}>Browse Groups</button>
+                        <div id="join-code-error" style={{display: 'none'}}>
+                            <p>Incorrect Code</p>
                         </div>
                     </form>
                 </Modal.Body>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Modal } from "react-bootstrap";
 
 import "../styles/createGroup.css";
 import axios from "axios";
@@ -58,28 +59,41 @@ function CreateGroup({ fetchUser, toggleMyGroups }) {
     } 
 
     return (
-        <>
-            <form id="create-group-form" onSubmit={handleCreateGroup}>
-                <label>Group Name</label><br/>
-                    <input 
-                        id="group-name" 
-                        type="text" 
-                        name="name"
-                        placeholder="Enter Group Name" 
-                        value={newGroupData.name} 
-                        onChange={handleInputChange}>
-                    </input><br/>
-                    {newGroupData.name === "" ? <p className="error">Please enter a group name</p> : null}
-                <label>Admin</label><br/>
-                    <input id="group-email" type="text" value={user.email} readOnly></input><br/>
-                <label>Group Privacy</label><br/>
-                    <div>
-                        <input type="radio" name="is_private" value="Private" checked={newGroupData.is_private === true} onChange={handleInputChange}/> Private <br/>
-                        <input type="radio" name="is_private" value="Public" checked={newGroupData.is_private === false} onChange={handleInputChange}/> Public                   
+        <Modal show={true} onHide={toggleMyGroups} centered size="md" style={{background: "none", height: 'fit-content'}}>
+            <Modal.Header closeButton>
+                <Modal.Title>Create Group</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <form id="create-group-form" onSubmit={handleCreateGroup}>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div id="left">
+                        <label>Group Name</label><br/>
+                        <input 
+                            id="group-name" 
+                            type="text" 
+                            name="name"
+                            placeholder="Enter Group Name" 
+                            value={newGroupData.name} 
+                            onChange={handleInputChange}>
+                        </input><br/>
+                        {newGroupData.name === "" ? <p className="error">Please enter a group name</p> : null}
                     </div>
-                    <button className="btn btn-dark" type="submit">Create Group</button>
-            </form>
-        </>
+                    <div id="right">
+                        <label>Admin</label><br/>
+                        <input id="group-email" type="text" value={user.email} readOnly></input><br/>
+                    </div>
+                    </div><hr/>
+                    <label>Group Privacy</label><br/>
+                        <div>
+                            <input type="radio" name="is_private" value="Private" checked={newGroupData.is_private === true} onChange={handleInputChange}/> Private <br/>
+                            <input type="radio" name="is_private" value="Public" checked={newGroupData.is_private === false} onChange={handleInputChange}/> Public                   
+                        </div>
+                </form>
+            </Modal.Body>
+            <Modal.Footer style={{backgroundColor: 'whitesmoke'}}>
+                <button id="submit-group-btn" className="btn btn-light" type="submit" onClick={handleCreateGroup}>Create Group</button>
+            </Modal.Footer>
+        </Modal>
     )
 }
 

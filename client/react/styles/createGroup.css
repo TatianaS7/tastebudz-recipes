@@ -3,6 +3,17 @@
     border-radius: 8px;
 }
 
+
 .error {
     color: red;
+}
+
+#submit-group-btn {
+    padding: 0.5em 2.5em;
+    border: var(--accent-color) 1px solid;
+}
+
+#submit-group-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
 }

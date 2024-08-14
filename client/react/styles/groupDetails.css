@@ -38,5 +38,5 @@
 .group-recipes {
     overflow-y: auto;
     height: 18em;
-    background: darkgray;
+    /* background: darkgray; */
 }

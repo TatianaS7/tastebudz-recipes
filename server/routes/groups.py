@@ -118,7 +118,7 @@ def join_group(group_id):
             if 'join_code' not in data:
                 return jsonify({'error': 'Join code is required'})
             if data['join_code'] != group.join_code:
-                return jsonify({'error': 'Invalid join code'})
+                return jsonify({'error': 'Invalid join code'}), 400
         
         for member in group.members:
             if member['email'] == data['email']:
@@ -129,7 +129,22 @@ def join_group(group_id):
         flag_modified(group, 'members')
         db.session.commit()
 
-        return jsonify(group.serialize()), 200
+        # Serialize Recipes to avoid type errors
+        recipes_data = [recipe.to_dict() for recipe in group.recipes]
+
+        # Create a dictionary to return the group data
+        group_data = {
+            'id': group.id,
+            'name': group.name,
+            'members': group.members,
+            'recipes': recipes_data,
+            'admin_email': group.admin_email,
+            'join_code': group.join_code,
+            'is_private': group.is_private
+        }
+
+
+        return jsonify(group_data), 200
     except Exception as e:
         return(str(e))
 
@@ -138,9 +153,12 @@ def join_group(group_id):
 def leave_group(group_id):
     try:
         group = Group.query.get(group_id)
+        if not group:
+            return jsonify({'error': 'Group not found'}), 404
+        
         data = request.get_json()
         if not data or 'email' not in data:
-            return jsonify({'error': 'Email is required'})
+            return jsonify({'error': 'Email is required'}), 400
         
         # Loop through the group's members to find the user
         for member in group.members:
@@ -150,15 +168,30 @@ def leave_group(group_id):
                 # Flag the group's members list as modified to recognize the change
                 flag_modified(group, 'members')
                 db.session.commit()
-                return jsonify(group.serialize())
+
+                # Serialize Recipes to avoid type errors
+                recipes_data = [recipe.to_dict() for recipe in group.recipes]
+
+                # Create a dictionary to return the group data
+                group_data = {
+                    'id': group.id,
+                    'name': group.name,
+                    'members': group.members,
+                    'recipes': recipes_data,
+                    'admin_email': group.admin_email,
+                    'join_code': group.join_code,
+                    'is_private': group.is_private
+                }
+
+                return jsonify(group_data), 200
             
             # If the user is an admin, they cannot leave the group
             elif member['email'] == data['email'] and member['role'] == 'admin':
-                return jsonify({'error': 'Admin cannot leave group'})
+                return jsonify({'error': 'Admin cannot leave group'}), 400
         
-        return jsonify({'error': 'User not in group'})
+        return jsonify({'error': 'User not in group'}), 400
     except Exception as e:
-        return(str(e))
+        return jsonify({'error': str(e)}), 500
 
 # Delete a Group (admin)
 @groups.route('/<group_id>', methods=['DELETE'])

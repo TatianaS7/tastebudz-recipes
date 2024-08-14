@@ -8,7 +8,7 @@ import RecipeCardWrapper from "./RecipeCardWrapper";
 import GroupCard from "./GroupCard";
 
 
-function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, joinGroup, setHomeView }) {
+function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, joinGroup, setHomeView, homeView, fetchUser }) {
     const [query, setQuery] = useState("");
     const [searchType, setSearchType] = useState("recipes");
 
@@ -60,7 +60,7 @@ function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, 
             <RecipeCardWrapper searchedRecipes={searchedRecipes} />
         }
         {searchedGroups.length > 0 && searchType === 'groups' &&
-            <GroupCard searchedGroups={searchedGroups} joinGroup={joinGroup} setHomeView={setHomeView}/>
+            <GroupCard searchedGroups={searchedGroups} joinGroup={joinGroup} setHomeView={setHomeView} homeView={homeView} fetchUser={fetchUser} />
         }
         </content>
     );

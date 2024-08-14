@@ -10,13 +10,11 @@ import logo from "../../assets/logo.png";
 import { SearchOutline } from 'react-ionicons'
 import { HomeOutline } from 'react-ionicons'
 
-function Navbar({ searchView, setSearchView, homeView, setHomeView, defaultView, setDefaultView, landingView, setLandingView }) {
+function Navbar({ searchView, setSearchView, homeView, setHomeView, defaultView, setDefaultView, landingView, setLandingView, fetchUser }) {
     const { isAuthenticated, user } = useAuth0();
 
     // Search Button Click Handler
     function handleSearchClick() {
-        // setSearchView(!searchView);
-        // setHomeView(!homeView);
         if (isAuthenticated) {
             setSearchView(!searchView);
             setHomeView(!homeView);
@@ -27,6 +25,7 @@ function Navbar({ searchView, setSearchView, homeView, setHomeView, defaultView,
     }
 
     function handleHomeClick() {
+        fetchUser(user);
         setHomeView(true);
         setSearchView(false);
         setDefaultView(true);

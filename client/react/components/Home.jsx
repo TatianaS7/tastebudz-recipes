@@ -7,7 +7,6 @@ import axios from "axios";
 import apiURL from "../api"
 
 import RecipeCardWrapper from "./RecipeCardWrapper";
-import RecipeCard from "./RecipeCard";
 import GroupCard from "./GroupCard";
 import CreateGroup from "./CreateGroup";
 
@@ -22,10 +21,6 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
     const [mySavesView, setMySavesView] = useState(false);
     const [createGroupView, setCreateGroupView] = useState(false);
     
-    const myRecipes = userData.created_recipes;
-    const myGroups = userData.groups;
-    const mySaves = userData.saved_recipes;
-
 
     // Fetch All Public Recipes
     async function getAllRecipes() {
@@ -50,7 +45,6 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
         setDefaultView(false);
         setMyRecipesView(true);
         setCreateGroupView(false);
-        console.log(myRecipes);
     }
 
 
@@ -60,6 +54,7 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
         setDefaultView(false);
         setMyRecipesView(false);
         setCreateGroupView(false);
+        console.log(userData.groups);
     }
 
     // Toggle My Saves View
@@ -99,8 +94,6 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                     <div className="page-view">
                         {defaultView ? (
                             <h5>All Recipes</h5>
-                        ) : createGroupView ? (
-                            <h5>Create a Group</h5>
                         ) : myRecipesView ? (
                             <h5>My Recipes</h5>
                         ) : myGroupsView ? (
@@ -113,7 +106,6 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                         {defaultView ? (
                             <>
                                 <RecipeCardWrapper allRecipes={allRecipes} defaultView={defaultView}/>
-                                {/* <RecipeCard allRecipes={allRecipes} defaultView={defaultView}/>                       */}
                             </>
                         ) : createGroupView ? (
                             <>
@@ -121,32 +113,30 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                             </>
                         ) : myRecipesView ? (
                             <>
-                                {myRecipes && myRecipes.length === 0 && (
+                                {userData.created_recipes && userData.created_recipes.length === 0 && (
                                 <div className="empty-message">
                                     <p>No recipes created yet!</p>
                                 </div>
                                 )}
-                                <RecipeCardWrapper myRecipes={myRecipes} myRecipesView={myRecipesView}/>
-                                {/* <RecipeCard myRecipes={myRecipes} myRecipesView={myRecipesView}/> */}
+                                <RecipeCardWrapper myRecipes={userData.created_recipes} myRecipesView={myRecipesView}/>
                             </>
                         ) : myGroupsView ? (
                             <>
-                                {myGroups && myGroups.length === 0 && (
+                                {userData.groups && userData.groups.length === 0 && (
                                     <div className="empty-message">
                                         <p>No groups joined yet!</p>
                                     </div>
                                 )}
-                                <GroupCard myGroups={myGroups} myGroupsView={myGroupsView} toggleMyGroups={toggleMyGroups} />  
+                                <GroupCard myGroups={userData.groups} myGroupsView={myGroupsView} setMyGroupsView={setMyGroupsView} toggleMyGroups={toggleMyGroups} fetchUser={fetchUser} />  
                             </>  
                         ) : mySavesView && (
                             <>
-                                {mySaves && mySaves.length === 0 && (
+                                {userData.saved_recipes && userData.saved_recipes.length === 0 && (
                                     <div className="empty-message">
                                         <p>No recipes saved yet!</p>
                                     </div>
                                 )}
-                                <RecipeCardWrapper mySaves={mySaves} mySavesView={mySavesView}/>
-                                {/* <RecipeCard mySaves={mySaves} mySavesView={mySavesView} /> */}
+                                <RecipeCardWrapper mySaves={userData.saved_recipes} mySavesView={mySavesView}/>
                             </>   
                         )}
                     </div>
