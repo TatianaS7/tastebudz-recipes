@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap";
 import "../styles/joinGroup.css";
 
 
-function JoinGroup({ setSearchView, joinGroup, currGroup, setShow, show, setMyGroupsView }) {
+function JoinGroup({ setSearchView, joinGroup, currGroup, setShow, show, setMyGroupsView, toggleMyGroups, setHomeView }) {
     const { user } = useAuth0();
 
 
@@ -19,7 +19,10 @@ function JoinGroup({ setSearchView, joinGroup, currGroup, setShow, show, setMyGr
         event.preventDefault();
         const groupCode = document.getElementById("join-code-input").value;
         joinGroup(user, groupCode, currGroup.id);
-        setMyGroupsView(true);
+        setShow(false);
+        // setHomeView(true);
+        // setMyGroupsView(true);
+        // toggleMyGroups();
     }
 
     return (

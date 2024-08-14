@@ -83,6 +83,7 @@ function App() {
                 email: user.email,
                 join_code: groupCode
             });
+            fetchUser(user);
         } catch (error) {
             console.error(error);
         }
@@ -96,7 +97,7 @@ function App() {
             }
 
             {isAuthenticated && searchView || !isAuthenticated && searchView ?
-                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup}/>
+                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup} setHomeView={setHomeView}/>
             : isAuthenticated && homeView &&
                 <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser}/>
             }

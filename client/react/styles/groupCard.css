@@ -10,6 +10,12 @@ section {
     gap: 2em;
 }
 
+#group-results .group {
+    width: 32em;
+    height: 15em;
+    align-content: center;
+}
+
 #my-group-results {
     display: flex;
     flex-wrap: wrap;

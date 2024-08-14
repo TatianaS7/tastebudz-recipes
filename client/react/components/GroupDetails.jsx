@@ -8,7 +8,7 @@ import { SearchOutline } from 'react-ionicons'
 import axios from "axios";
 import apiURL from "../api";
 
-import RecipeCard from "./RecipeCard";
+import RecipeCardWrapper from "./RecipeCardWrapper";
 
 function GroupDetails({ groupData, expandGroupView, setExpandGroupView }) {
   const { user } = useAuth0();
@@ -41,7 +41,7 @@ function GroupDetails({ groupData, expandGroupView, setExpandGroupView }) {
                 <button className="btn btn-dark">Delete Group</button>
               </div>
             ) : (
-              <button className="btn btn-dark">Leave Group</button>
+              <button className="btn btn-outline-danger">Leave Group</button>
             )}
           </div>
         </Modal.Header>
@@ -69,7 +69,7 @@ function GroupDetails({ groupData, expandGroupView, setExpandGroupView }) {
                 
                 <div className="group-recipes">
                     {groupData ? (
-                        <RecipeCard groupRecipes={groupData.recipes} expandGroupView={expandGroupView}/>
+                      <RecipeCardWrapper groupRecipes={groupData.recipes} expandGroupView={expandGroupView}/>
                     ) : (
                         <>
                             <p>No Recipes Added!</p>

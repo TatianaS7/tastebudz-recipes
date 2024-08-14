@@ -10,26 +10,26 @@ import JoinGroup from "./JoinGroup";
 import GroupDetails from "./GroupDetails";
 
 
-function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, toggleMyGroups }) {
+function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, toggleMyGroups, setHomeView }) {
     const { user, isAuthenticated } = useAuth0();
     const [show, setShow] = useState(false);
-    const [joinGroupView, setJoinGroupView] = useState(false);
     const [currGroup, setCurrGroup] = useState([]);
     const [groupData, setGroupData] = useState([]);
     const [expandGroupView, setExpandGroupView] = useState(false);
+    const [membershipStatus, setMembershipStatus] = useState(false);
 
 
     // Toggle Join Group View
     function toggleJoinGroup(group) {
         setCurrGroup(group);
-        {group.is_private ?
-            setShow(true) 
-        :
-            joinGroup(user, null, group.id);
-            setCurrGroup([]);
-        }
         console.log(currGroup);
-        console.log(joinGroupView);
+        if (group.is_private) {
+            setShow(true) 
+        } else {
+            joinGroup(user, null, group.id).then(() => {
+                toggleMyGroups();
+            });
+        }
     }    
 
     // Fetch Group Data
@@ -50,11 +50,31 @@ function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, toggleMy
         console.log(groupData);
     }
 
+    // Check If User is in Group
+    async function checkMembership(group) {
+        try {
+            const res = await axios.get(`${apiURL}/groups/${group.id}`);
+            const data = res.data;
+            const isMember = data.members.some(member => member.email === user.email);
+            setMembershipStatus(prevState => ({...prevState, [group.id]: isMember}));
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        if (searchedGroups) {
+            searchedGroups.forEach(group => {
+                checkMembership(group);
+            });
+        }
+    }, [searchedGroups]);
+
 
     return (
         <>
         {show &&
-            <JoinGroup joinGroup={joinGroup} currGroup={currGroup} setShow={setShow} show={show} />
+            <JoinGroup joinGroup={joinGroup} currGroup={currGroup} setShow={setShow} show={show} toggleMyGroups={toggleMyGroups} setHomeView={setHomeView} />
         }
 
         <div id={myGroupsView ? "my-group-results" : "group-results"}>
@@ -67,21 +87,34 @@ function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, toggleMy
                         <div className="join">
                             {isAuthenticated ? (
                                 <>
-                                    <button id="joinGroup-btn" className="btn btn-dark" onClick={() => toggleJoinGroup(group)}>
-                                        Join Group
-                                    </button>
-                                    <div className="group-type">
-                                        {group.is_private ?
-                                            <p>Join Code Required</p>
-                                        :
-                                            <p>Public Group</p>
-                                        }
-                                    </div>
+                                {/* Check Membership */}
+                                {membershipStatus[group.id] === undefined ? (
+                                    <p>Loading...</p>
+                                ) : membershipStatus[group.id] ? (
+                                    <>
+                                        <button id="viewGroup-btn" className="btn btn-dark" onClick={() => viewGroup(group)}>View Group</button>
+                                        <p> Member</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button id="joinGroup-btn" className="btn btn-dark" onClick={() => toggleJoinGroup(group)}>Join Group</button>
+                                        <div className="group-type">
+                                            {group.is_private ?
+                                                <p>Join Code Required</p>
+                                            :
+                                                <p>Public Group</p>
+                                            }
+                                        </div>
+                                    </>
+                                )}
                                 </>
                             ) : (
                                 <p>Sign In to Join Group</p>
                             )}
                         </div>
+                        {expandGroupView && (
+                            <GroupDetails groupData={groupData} expandGroupView={expandGroupView} setExpandGroupView={setExpandGroupView} />
+                        )}
                 </div>
             );
         })) : 
