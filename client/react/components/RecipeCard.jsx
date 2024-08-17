@@ -8,6 +8,11 @@ import { TimeOutline, PeopleOutline, BookmarkOutline, EyeOutline } from 'react-i
 function RecipeCard({ recipes, viewType }) {
     const { isAuthenticated } = useAuth0();
 
+    // Open Recipe Modal
+    function openRecipe(recipe) {
+        console.log(recipe);
+    }
+
     return (
         <div id={viewType === "defaultView" || viewType === "myRecipes" || viewType === "group" ? "all-recipes" : "recipe-results"}>
             {recipes && recipes.map((recipe, index) => {
@@ -17,7 +22,7 @@ function RecipeCard({ recipes, viewType }) {
                     <div className="recipe-header">
                         <h3>{recipe.name}</h3>
                         <div className="right-side">
-                            {isAuthenticated && <button className="open-recipe"><EyeOutline color={'#ad78de'} height="25px" width="25px" /></button>}
+                            {isAuthenticated && <button className="open-recipe" onClick={() => openRecipe(recipe)}><EyeOutline color={'#ad78de'} height="25px" width="25px" /></button>}
                             {(viewType !== "myRecipes") && <button id="save-recipe" className="btn btn-outline-dark"><BookmarkOutline color={'#ad78de'} height="25px" width="25px" /></button>}
                         </div>
                     </div>

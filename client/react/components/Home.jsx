@@ -9,6 +9,7 @@ import apiURL from "../api"
 import RecipeCardWrapper from "./RecipeCardWrapper";
 import GroupCard from "./GroupCard";
 import CreateGroup from "./CreateGroup";
+import CreateRecipe from "./CreateRecipe";
 
 
 
@@ -20,6 +21,7 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
     const [myGroupsView, setMyGroupsView] = useState(false);
     const [mySavesView, setMySavesView] = useState(false);
     const [createGroupView, setCreateGroupView] = useState(false);
+    const [createRecipeView, setCreateRecipeView] = useState(false);
     
 
     // Fetch All Public Recipes
@@ -42,9 +44,11 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
 
     // Toggle My Recipes View
     function toggleMyRecipes() {
-        setDefaultView(false);
         setMyRecipesView(true);
+        setDefaultView(false);
         setCreateGroupView(false);
+        setCreateRecipeView(false);
+        setMyGroupsView(false);
     }
 
 
@@ -54,7 +58,8 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
         setDefaultView(false);
         setMyRecipesView(false);
         setCreateGroupView(false);
-        console.log(userData.groups);
+        setMySavesView(false);
+        setCreateRecipeView(false);
     }
 
     // Toggle My Saves View
@@ -64,6 +69,7 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
         setMyRecipesView(false);
         setMyGroupsView(false);
         setCreateGroupView(false);
+        setCreateRecipeView(false);
     }
 
     // Toggle Create Group View
@@ -73,6 +79,17 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
         setMyRecipesView(false);
         setMyGroupsView(false);
         setMySavesView(false);
+        setCreateRecipeView(false);
+    }
+
+    // Toggle Create Recipe View
+    function toggleCreateRecipe() {
+        setCreateRecipeView(true);
+        setDefaultView(false);
+        setMyRecipesView(false);
+        setMyGroupsView(false);
+        setMySavesView(false);
+        setCreateGroupView(false);
     }
 
     return (
@@ -82,7 +99,7 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
             <div className="flex-container">
                 <div className="action-buttons">
                     <button id="public-recipes" onClick={() => setDefaultView(true)}>Home</button><hr/>
-                    <button id="create-recipe">Create a Recipe</button>
+                    <button id="create-recipe" onClick={toggleCreateRecipe}>Create a Recipe</button>
                     <button id="create-group" onClick={toggleCreateGroup}>Create a Group</button>
                     <hr/>
                     <button id="my-recipes" onClick={toggleMyRecipes}>My Recipes</button>
@@ -104,13 +121,11 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                     </div>
                     <div className="feed">
                         {defaultView ? (
-                            <>
                                 <RecipeCardWrapper allRecipes={allRecipes} defaultView={defaultView}/>
-                            </>
                         ) : createGroupView ? (
-                            <>
-                                <CreateGroup userData={userData} fetchUser={fetchUser} toggleMyGroups={toggleMyGroups}/>
-                            </>
+                                <CreateGroup fetchUser={fetchUser} toggleMyGroups={toggleMyGroups}/>
+                        ) : createRecipeView ? (
+                                <CreateRecipe fetchUser={fetchUser} toggleMyRecipes={toggleMyRecipes}/>
                         ) : myRecipesView ? (
                             <>
                                 {userData.created_recipes && userData.created_recipes.length === 0 && (

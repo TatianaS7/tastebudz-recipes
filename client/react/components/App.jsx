@@ -30,7 +30,7 @@ function App() {
                 const res = await axios.post(`${apiURL}/users/`, {
                     email: user.email
                 });
-                // console.log(res.data);
+                console.log(res.data);
                 const data = res.data;
                 setUserData(data);
             }

@@ -1,0 +1,46 @@
+#create-recipe-form {
+    padding: 1em 2em;
+}
+
+#create-recipe-form label {
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+#create-recipe-form input, #create-recipe-form textarea {
+    border-radius: 8px;
+    padding: 7px;
+    border: 0.5px solid;
+    color: black;
+    margin-bottom: 1em;
+}
+
+#ingredients-div {
+    max-height: 10em;
+    overflow-y: auto;
+    margin-top: 1em;
+}
+.ingredient-row {
+    display: flex;
+    gap: 1em;
+}
+
+#qty-input input {
+    width: 5em;
+}
+
+#add-ingredient-btn {
+    margin-left: 1em;
+    border: none;
+    background: none;
+}
+#remove-ingredient-btn {
+    background-color: var(--accent-color);
+    color: white;
+    margin-left: 1em;
+}
+
+#submit-recipe-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
