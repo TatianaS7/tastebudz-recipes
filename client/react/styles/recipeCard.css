@@ -55,7 +55,7 @@
     text-align: left;
 }
 
-.open-recipe, #save-recipe {
+.open-recipe, #save-recipe, #unsave-recipe {
     background: none;
     border: none;
 }

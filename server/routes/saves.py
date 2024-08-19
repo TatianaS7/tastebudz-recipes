@@ -38,13 +38,13 @@ def add_save():
         db.session.add(save)
         db.session.commit()
     
-        return jsonify({'message': 'Save added successfully!'}), 200
+        return jsonify(save.serialize()), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 400
     
 
 # Get All Saves (by User)
-@saves.route('/all', methods=['GET'])
+@saves.route('/all', methods=['POST'])
 def get_all_saves():
     try:
         data = request.get_json()
@@ -53,7 +53,7 @@ def get_all_saves():
         
         saves = Saves.query.filter_by(saved_by=data['saved_by']).all()
         if not saves:
-            return jsonify({'message': 'No saves found'}), 400
+            return jsonify({'error': 'No saves found'})
         
         # Return saves with recipe details
         recipes = []

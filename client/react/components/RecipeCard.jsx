@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import "../styles/recipeCard.css";
-import { TimeOutline, PeopleOutline, BookmarkOutline, EyeOutline } from 'react-ionicons'
+import { TimeOutline, PeopleOutline, EyeOutline } from 'react-ionicons'
+import Saves from "./Saves";
 
 
-function RecipeCard({ recipes, viewType }) {
+function RecipeCard({ recipes, viewType, toggleMySaves, mySaves, fetchUser, refreshSaves, setRefreshSaves }) {
     const { isAuthenticated } = useAuth0();
 
     // Open Recipe Modal
@@ -14,7 +15,7 @@ function RecipeCard({ recipes, viewType }) {
     }
 
     return (
-        <div id={viewType === "defaultView" || viewType === "myRecipes" || viewType === "group" ? "all-recipes" : "recipe-results"}>
+        <div id={viewType === "defaultView" || viewType === "myRecipes" || viewType === "group" || viewType === "mySaves" ? "all-recipes" : "recipe-results"}>
             {recipes && recipes.map((recipe, index) => {
                 return (
                 <div key={index} className="recipe">
@@ -23,7 +24,7 @@ function RecipeCard({ recipes, viewType }) {
                         <h3>{recipe.name}</h3>
                         <div className="right-side">
                             {isAuthenticated && <button className="open-recipe" onClick={() => openRecipe(recipe)}><EyeOutline color={'#ad78de'} height="25px" width="25px" /></button>}
-                            {(viewType !== "myRecipes") && <button id="save-recipe" className="btn btn-outline-dark"><BookmarkOutline color={'#ad78de'} height="25px" width="25px" /></button>}
+                            {(viewType !== "myRecipes") && <Saves key={recipe.id} recipe={recipe} toggleMySaves={toggleMySaves} mySaves={mySaves} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves}/>}
                         </div>
                     </div>
                     ) : <h3>{recipe.name}</h3>}
