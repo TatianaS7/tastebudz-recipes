@@ -10,7 +10,7 @@ import JoinGroup from "./JoinGroup";
 import GroupDetails from "./GroupDetails";
 
 
-function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, setMyGroupsView, toggleMyGroups, setHomeView, homeView, fetchUser }) {
+function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, setMyGroupsView, toggleMyGroups, setHomeView, homeView, fetchUser, refreshSaves, mySaves, setRefreshSaves, setMySavedRecipes, mySavesView, setMySavesView }) {
   const { user, isAuthenticated } = useAuth0();
   const [show, setShow] = useState(false);
   const [currGroup, setCurrGroup] = useState([]);
@@ -44,7 +44,7 @@ function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, setMyGro
   // Leave Group
   async function leaveGroup(group) {
     try {
-      console.log(group.id);
+      // console.log(group.id);
       const res = await axios.put(`${apiURL}/groups/leave/${group.id}`, {
         email: user.email,
       });
@@ -159,6 +159,12 @@ function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, setMyGro
                       fetchUser={fetchUser}
                       fetchGroup={fetchGroup}
                       leaveGroup={leaveGroup}
+                      refreshSaves={refreshSaves} 
+                      setRefreshSaves={setRefreshSaves} 
+                      mySaves={mySaves} 
+                      setMySavedRecipes={setMySavedRecipes} 
+                      mySavesView={mySavesView} 
+                      setMySavesView={setMySavesView}
                     />
                   )}
                 </div>
@@ -191,6 +197,12 @@ function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, setMyGro
                       fetchUser={fetchUser}
                       fetchGroup={fetchGroup}
                       leaveGroup={leaveGroup}
+                      refreshSaves={refreshSaves} 
+                      setRefreshSaves={setRefreshSaves} 
+                      mySaves={mySaves} 
+                      setMySavedRecipes={setMySavedRecipes} 
+                      mySavesView={mySavesView} 
+                      setMySavesView={setMySavesView}
                     />
                   )}
                 </>

@@ -8,7 +8,7 @@ import RecipeCardWrapper from "./RecipeCardWrapper";
 import GroupCard from "./GroupCard";
 
 
-function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, joinGroup, setHomeView, homeView, fetchUser }) {
+function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, joinGroup, setHomeView, homeView, fetchUser, refreshSaves, setRefreshSaves, mySavedRecipes, setMySavedRecipes, mySavesView, setMySavesView }) {
     const [query, setQuery] = useState("");
     const [searchType, setSearchType] = useState("recipes");
 
@@ -57,10 +57,29 @@ function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, 
             )}
         </div>
         {searchedRecipes.length > 0 && searchType === 'recipes' &&
-            <RecipeCardWrapper searchedRecipes={searchedRecipes} />
+            <RecipeCardWrapper 
+            fetchUser={fetchUser} 
+            searchedRecipes={searchedRecipes} 
+            refreshSaves={refreshSaves} 
+            setRefreshSaves={setRefreshSaves} 
+            mySaves={mySavedRecipes} 
+            setMySavedRecipes={setMySavedRecipes} 
+            mySavesView={mySavesView} 
+            setMySavesView={setMySavesView} />
         }
         {searchedGroups.length > 0 && searchType === 'groups' &&
-            <GroupCard searchedGroups={searchedGroups} joinGroup={joinGroup} setHomeView={setHomeView} homeView={homeView} fetchUser={fetchUser} />
+            <GroupCard 
+                searchedGroups={searchedGroups} 
+                joinGroup={joinGroup} 
+                setHomeView={setHomeView} 
+                homeView={homeView} 
+                fetchUser={fetchUser} 
+                refreshSaves={refreshSaves} 
+                setRefreshSaves={setRefreshSaves} 
+                mySaves={mySavedRecipes} 
+                setMySavedRecipes={setMySavedRecipes} 
+                mySavesView={mySavesView} 
+                setMySavesView={setMySavesView}/>
         }
         </content>
     );

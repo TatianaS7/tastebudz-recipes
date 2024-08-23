@@ -13,15 +13,14 @@ import CreateRecipe from "./CreateRecipe";
 
 
 
-function Home({ userData, defaultView, setDefaultView, fetchUser }) {
+function Home({ userData, defaultView, setDefaultView, fetchUser, refreshSaves, setRefreshSaves, mySavedRecipes, setMySavedRecipes, mySavesView, setMySavesView }) {
     const { user } = useAuth0();
     const [myRecipesView, setMyRecipesView] = useState(false);
     const [allRecipes, setAllRecipes] = useState([]);
-    const [mySavedRecipes, setMySavedRecipes] = useState([]);
-    const [refreshSaves, setRefreshSaves] = useState(false);
+    // const [mySavedRecipes, setMySavedRecipes] = useState([]);
 
     const [myGroupsView, setMyGroupsView] = useState(false);
-    const [mySavesView, setMySavesView] = useState(false);
+    // const [mySavesView, setMySavesView] = useState(false);
     const [createGroupView, setCreateGroupView] = useState(false);
     const [createRecipeView, setCreateRecipeView] = useState(false);
     
@@ -43,26 +42,26 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
         }
     }, [defaultView]);
 
-    // Fetch User Saves
-    async function fetchUserSaves(user) {
-        try {
-            const res = await axios.post(`${apiURL}/saves/all`, {
-                saved_by: user.email
-            })
-            const data = res.data;
-            setMySavedRecipes(data.saves);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    // // Fetch User Saves
+    // async function fetchUserSaves(user) {
+    //     try {
+    //         const res = await axios.post(`${apiURL}/saves/all`, {
+    //             saved_by: user.email
+    //         })
+    //         const data = res.data;
+    //         setMySavedRecipes(data.saves);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
 
-    useEffect(() => {
-        if (mySavesView || refreshSaves) {
-            fetchUserSaves(user);
-            setRefreshSaves(false);
-            fetchUser(user);
-        }
-    }, [mySavesView, refreshSaves]);
+    // useEffect(() => {
+    //     if (mySavesView || refreshSaves) {
+    //         fetchUserSaves(user);
+    //         setRefreshSaves(false);
+    //         fetchUser(user);
+    //     }
+    // }, [mySavesView, refreshSaves]);
     
 
     // Toggle My Recipes View
@@ -144,7 +143,7 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                     </div>
                     <div className="feed">
                         {defaultView ? (
-                                <RecipeCardWrapper fetchUser={fetchUser} allRecipes={allRecipes} mySaves={mySavedRecipes} defaultView={defaultView} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} toggleMySaves={toggleMySaves}/>
+                                <RecipeCardWrapper fetchUser={fetchUser} allRecipes={allRecipes} mySaves={mySavedRecipes} defaultView={defaultView} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} toggleMySaves={toggleMySaves} setMySavedRecipes={setMySavedRecipes}/>
                         ) : createGroupView ? (
                                 <CreateGroup fetchUser={fetchUser} toggleMyGroups={toggleMyGroups}/>
                         ) : createRecipeView ? (
@@ -165,7 +164,7 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                                         <p>No groups joined yet!</p>
                                     </div>
                                 )}
-                                <GroupCard myGroups={userData.groups} myGroupsView={myGroupsView} setMyGroupsView={setMyGroupsView} toggleMyGroups={toggleMyGroups} fetchUser={fetchUser} />  
+                                <GroupCard myGroups={userData.groups} myGroupsView={myGroupsView} setMyGroupsView={setMyGroupsView} toggleMyGroups={toggleMyGroups} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySaves={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView} />  
                             </>  
                         ) : mySavesView && (
                             <>
@@ -174,7 +173,7 @@ function Home({ userData, defaultView, setDefaultView, fetchUser }) {
                                         <p>No recipes saved yet!</p>
                                     </div>
                                 ) : (
-                                    <RecipeCardWrapper mySaves={mySavedRecipes} mySavesView={mySavesView} toggleMySaves={toggleMySaves} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves}/>
+                                    <RecipeCardWrapper mySaves={mySavedRecipes} mySavesView={mySavesView} toggleMySaves={toggleMySaves} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} setMySavedRecipes={setMySavedRecipes}/>
                                 )}
                             </>   
                         )}

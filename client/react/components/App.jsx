@@ -17,10 +17,13 @@ function App() {
     const [homeView, setHomeView] = useState(true);
     const [defaultView, setDefaultView] = useState(true);
     const [landingView, setLandingView] = useState(true);
+    const [mySavesView, setMySavesView] = useState(false);
 
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchedGroups, setSearchedGroups] = useState([]);
     const [userData, setUserData] = useState([]);
+    const [refreshSaves, setRefreshSaves] = useState(false);
+    const [mySavedRecipes, setMySavedRecipes] = useState([]);
 
 
     // Fetch User
@@ -97,9 +100,9 @@ function App() {
             }
 
             {isAuthenticated && searchView || !isAuthenticated && searchView ?
-                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup} setHomeView={setHomeView} homeView={homeView} fetchUser={fetchUser}/>
+                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup} setHomeView={setHomeView} homeView={homeView} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySavedRecipes={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView}/>
             : isAuthenticated && homeView &&
-                <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser}/>
+                <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySavedRecipes={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView}/>
             }
         </main>
     )

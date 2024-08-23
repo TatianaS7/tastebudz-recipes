@@ -10,12 +10,14 @@ function RecipeCardWrapper({
   myRecipesView,
   groupRecipes,
   expandGroupView,
+  showDetails,
   mySaves,
   mySavesView,
   toggleMySaves,
   fetchUser,
   refreshSaves,
   setRefreshSaves,
+  setMySavedRecipes
 }) {
   let recipes = [];
   let viewType = "";
@@ -42,10 +44,14 @@ function RecipeCardWrapper({
       recipes={recipes}
       viewType={viewType}
       toggleMySaves={toggleMySaves}
+      showDetails={showDetails}
+      groupRecipes={groupRecipes}
       fetchUser={fetchUser}
       mySaves={mySaves}
+      mySavesView={mySavesView}
       refreshSaves={refreshSaves}
       setRefreshSaves={setRefreshSaves}
+      setMySavedRecipes={setMySavedRecipes}
     />
   );
 }

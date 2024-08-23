@@ -10,7 +10,7 @@ import apiURL from "../api";
 
 import RecipeCardWrapper from "./RecipeCardWrapper";
 
-function GroupDetails({ groupData, expandGroupView, setExpandGroupView, toggleMyGroups, fetchUser, fetchGroup, leaveGroup }) {
+function GroupDetails({ groupData, expandGroupView, setExpandGroupView, toggleMyGroups, fetchUser, fetchGroup, leaveGroup, refreshSaves, setRefreshSaves, mySavedRecipes, setMySavedRecipes, mySavesView, setMySavesView }) {
   const { user } = useAuth0();
   const [showDetails, setShowDetails] = useState(false);
 
@@ -76,7 +76,7 @@ function GroupDetails({ groupData, expandGroupView, setExpandGroupView, toggleMy
                 
                 <div className="group-recipes">
                     {groupData && Array.isArray(groupData.recipes) && groupData.recipes.length > 0 ? (
-                      <RecipeCardWrapper groupRecipes={groupData.recipes} expandGroupView={expandGroupView}/>
+                      <RecipeCardWrapper fetchUser={fetchUser} groupRecipes={groupData.recipes} expandGroupView={expandGroupView} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySaves={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView} showDetails={showDetails}/>
                     ) : groupData && Array.isArray(groupData.recipes) && groupData.recipes.length === 0 ? (
                             <p>No Recipes Added!</p>
                     ) : null }
