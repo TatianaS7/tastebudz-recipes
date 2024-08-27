@@ -92,11 +92,11 @@ function Saves({ fetchUser, toggleMySaves, recipe, mySaves, refreshSaves, setRef
         <>
             {isSaved ? (
                 <button id="unsave-recipe" className="btn btn-outline-dark" onClick={handleUnsaveClick}>
-                    <Bookmark color={'#ad78de'} height="25px" width="25px" />
+                    <Bookmark color={'#ad78de'} height="30px" width="30px" />
                 </button>
             ) : (
                 <button id="save-recipe" className="btn btn-outline-dark" onClick={() => saveRecipe(recipe)}>
-                    <BookmarkOutline color={'#ad78de'} height="25px" width="25px" />
+                    <BookmarkOutline color={'#ad78de'} height="30px" width="30px" />
                 </button>
             )}
         </>

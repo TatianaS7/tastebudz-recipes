@@ -1,0 +1,75 @@
+.recipe-image-div {
+    height: 13em;
+    width: 13em;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.recipe-image-div img {
+    /* height: fit-content; */
+    max-width: 100%;
+}
+
+.img-name-div {
+    display: flex;
+    gap: 3em;
+    padding: 1em;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.flex-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.details-user {
+    color: var(--dark-grey);
+    font-weight: bold;
+}
+
+.detail-stats p {
+    font-size: 13pt;
+}
+
+.details-right-side {
+    align-items: flex-start;
+}
+
+.ingredients li {
+    list-style:square;
+    text-transform: capitalize;
+}
+
+.ingredients {
+    width: 45%;
+    font-size: 13pt;
+    font-weight: lighter;
+    padding: 0 3px;
+    text-wrap: wrap;
+    text-transform: capitalize;
+}
+
+.ingredients h3, .instructions h3 {
+    padding: 0;
+    text-align: left;
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+#all-recipes .instructions {
+    width: 50%;
+}
+.instructions {
+    width: 45%;
+    font-size: 13pt;
+    padding: 0 3px;
+    text-wrap: wrap;
+    height: 100%;
+    text-transform: capitalize;
+}
+
+.scroll-div {
+    overflow: auto;
+    height: 6em;
+}

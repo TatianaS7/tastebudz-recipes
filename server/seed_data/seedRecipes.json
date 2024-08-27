@@ -5,6 +5,7 @@
         "instructions": ["Cook chicken", "cook pasta", "mix together with alfredo sauce"],
         "servings": 5,
         "time": 45,
+        "image": "https://www.budgetbytes.com/wp-content/uploads/2022/07/Chicken-Alfredo-V3-768x1024.jpg",
         "tags": ["pasta", "chicken", "dinner"],
         "user": "liz3@gmail.com",
         "group_id": 2,
@@ -38,6 +39,7 @@
         "instructions": ["Mix cream cheese, strawberries, and powdered sugar together", "Spread mixture between two slices of bread", "Mix eggs, milk, vanilla, and cinnamon together", "Dip sandwich in egg mixture", "Cook on griddle", "Top with syrup, powdered sugar, and fresh strawberries"],
         "servings": 2,
         "time": 20,
+        "image": "https://eatwellwithlex.com/wp-content/uploads/2022/02/IMG_1283_Facetune_16-11-2020-22-53-22.jpg",
         "tags": ["breakfast", "french toast", "strawberry", "cheesecake"],
         "user": "aliyah_walters@yahoo.com",
         "group_id": 3,
@@ -60,6 +62,7 @@
         "instructions": ["Cook chicken", "Add taco seasoning", "Serve in tortillas"],
         "servings": 4,
         "time": 30,
+        "image": "https://therecipecritic.com/wp-content/uploads/2022/11/shredded-chicken-tacos-2.jpg",
         "tags": ["chicken", "tacos", "dinner"],
         "user": "samanthawebster@yahoo.com"
     },
@@ -69,6 +72,7 @@
         "instructions": ["Drain salmon", "Mix all ingredients together", "Form into patties", "Fry in oil until golden brown"],
         "servings": 4,
         "time": 20,
+        "image": "https://www.lanascooking.com/wp-content/uploads/2021/09/salmon-croquettes-feature-1200.jpg",
         "tags": ["seafood", "salmon", "dinner"],
         "user": "kimberly_watson1@gmail.com"
     },
@@ -78,6 +82,7 @@
         "instructions": ["Cut watermelon into cubes", "Mix with feta and mint", "Drizzle with balsamic glaze"],
         "servings": 4,
         "time": 10,
+        "image": "https://www.twopeasandtheirpod.com/wp-content/uploads/2020/06/Watermelon-Feta-Salad-3.jpg",
         "tags": ["salad", "watermelon", "feta", "light"],
         "user": "david_saltman@yahoo.com"
     }
