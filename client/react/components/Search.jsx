@@ -51,67 +51,67 @@ function Search({ getAllRecipes, allRecipes, searchRecipes, searchedRecipes, sea
 
     return (
         <div id="search-page">
-        <div id="search-buttons">
-            <button id="search-recipe-view" value={'recipes'} onClick={() => handleSearchTypeChange('recipes')}>Search Recipes</button>
-            <button id="search-group-view" value={'groups'} onClick={() => handleSearchTypeChange('groups')}>Search Groups</button>
-        </div>
-        <div id="search-container">
-            {searchType === "recipes" ? (
-                <>
-                    <input id="searchbar" type="text" placeholder="Search Recipes..." onChange={handleQueryChange}></input>
-                    <button className="btn btn-outline-dark" id="submit-recipe-search" onClick={() => handleRecipeSearchClick(query)}>Search</button>
-                </>
-            ) : searchType === 'groups' && (
-                <>
-                    <input id="searchbar" type="text" placeholder="Search Groups..." onChange={handleQueryChange}></input>
-                    <button className="btn btn-outline-dark" id="submit-group-search" onClick={() => handleGroupSearchClick(query)}>Search</button>
-                </>
-            )}
-        </div>
+            <div id="search-buttons">
+                <button id="search-recipe-view" value={'recipes'} onClick={() => handleSearchTypeChange('recipes')}>Recipes</button>
+                <button id="search-group-view" value={'groups'} onClick={() => handleSearchTypeChange('groups')}>Groups</button>
+            </div>
+            <div id="search-container">
+                {searchType === "recipes" ? (
+                    <>
+                        <input id="searchbar" type="text" placeholder="Search Recipes..." onChange={handleQueryChange}></input>
+                        <button className="btn btn-outline-dark" id="submit-recipe-search" onClick={() => handleRecipeSearchClick(query)}>Search</button>
+                    </>
+                ) : searchType === 'groups' && (
+                    <>
+                        <input id="searchbar" type="text" placeholder="Search Groups..." onChange={handleQueryChange}></input>
+                        <button className="btn btn-outline-dark" id="submit-group-search" onClick={() => handleGroupSearchClick(query)}>Search</button>
+                    </>
+                )}
+            </div>
 
-        {searchType === 'recipes' && searchView &&
-            <Categories 
-                allRecipes={allRecipes} 
-                searchType={searchType} 
-                fetchUser={fetchUser} 
-                searchView={searchView} 
-                searchedRecipes={searchedRecipes}
-                refreshSaves={refreshSaves} 
-                setRefreshSaves={setRefreshSaves} 
-                mySaves={mySavedRecipes} 
-                setMySavedRecipes={setMySavedRecipes}
-                mySavesView={mySavesView}
-                setMySavesView={setMySavesView}/>        
-        }
+            {searchType === 'recipes' && searchView &&
+                <Categories 
+                    allRecipes={allRecipes} 
+                    searchType={searchType} 
+                    fetchUser={fetchUser} 
+                    searchView={searchView} 
+                    searchedRecipes={searchedRecipes}
+                    refreshSaves={refreshSaves} 
+                    setRefreshSaves={setRefreshSaves} 
+                    mySaves={mySavedRecipes} 
+                    setMySavedRecipes={setMySavedRecipes}
+                    mySavesView={mySavesView}
+                    setMySavesView={setMySavesView}/>        
+            }
 
-        {searchType === 'recipes' && searchView && 
-            <RecipeCardWrapper 
-            searchType={searchType}
-            fetchUser={fetchUser} 
-            searchView={searchView}
-            allRecipes={allRecipes}
-            searchedRecipes={searchedRecipes} 
-            refreshSaves={refreshSaves} 
-            setRefreshSaves={setRefreshSaves} 
-            mySaves={mySavedRecipes} 
-            setMySavedRecipes={setMySavedRecipes} 
-            mySavesView={mySavesView} 
-            setMySavesView={setMySavesView} />
-        }
-        {searchedGroups.length > 0 && searchType === 'groups' &&
-            <GroupCard 
-                searchedGroups={searchedGroups} 
-                joinGroup={joinGroup} 
-                setHomeView={setHomeView} 
-                homeView={homeView} 
+            {searchType === 'recipes' && searchView && 
+                <RecipeCardWrapper 
+                searchType={searchType}
                 fetchUser={fetchUser} 
+                searchView={searchView}
+                allRecipes={allRecipes}
+                searchedRecipes={searchedRecipes} 
                 refreshSaves={refreshSaves} 
                 setRefreshSaves={setRefreshSaves} 
                 mySaves={mySavedRecipes} 
                 setMySavedRecipes={setMySavedRecipes} 
                 mySavesView={mySavesView} 
-                setMySavesView={setMySavesView}/>
-        }
+                setMySavesView={setMySavesView} />
+            }
+            {searchedGroups.length > 0 && searchType === 'groups' &&
+                <GroupCard 
+                    searchedGroups={searchedGroups} 
+                    joinGroup={joinGroup} 
+                    setHomeView={setHomeView} 
+                    homeView={homeView} 
+                    fetchUser={fetchUser} 
+                    refreshSaves={refreshSaves} 
+                    setRefreshSaves={setRefreshSaves} 
+                    mySaves={mySavedRecipes} 
+                    setMySavedRecipes={setMySavedRecipes} 
+                    mySavesView={mySavesView} 
+                    setMySavesView={setMySavesView}/>
+            }
         </div>
     );
 }

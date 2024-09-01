@@ -1,10 +1,12 @@
 #categories {
-    height: 8em;
+    height:10em;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     gap: 3em;
     overflow-y: hidden;
     overflow-x: auto;
+    margin: 1em 15em;
+    padding: 0.5em 0em;
 }
 .category {
     height: 6em;
@@ -24,6 +26,7 @@
     height: 6em;
     width: 6em;
     padding: 2px;
+    border-radius: 5em;
     border: 1.5pt solid var(--accent-color);
 }
 

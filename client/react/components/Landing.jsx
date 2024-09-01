@@ -25,32 +25,33 @@ function Landing() {
             </div><hr/><br/>
 
             <h3>Categories</h3>
-            <div id="categories">
-                <div className="category">
+            <div id="landing-categories">
+                <div className="landing-category">
                     <img src="https://simply-delicious-food.com/wp-content/uploads/2022/09/Breakfast-board28.jpg" alt="Breakfast" />
                     <p>Breakfast</p>
                 </div>
-                <div className="category">
+                <div className="landing-category">
                     <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/01/Vegan-foods-8c73cd6.jpg?quality=90&resize=440,400" alt="Vegan" />
                     <p>Vegan</p>
                 </div>
-                <div className="category">
+                <div className="landing-category">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Desserts.jpg/640px-Desserts.jpg" alt="Dessert" />
                     <p>Dessert</p>
                 </div>
-                <div className="category">
+                <div className="landing-category">
                     <img src="https://images.immediate.co.uk/production/volatile/sites/30/2013/05/Puttanesca-fd5810c.jpg" alt="Pasta" />
                     <p>Pasta</p>
                 </div>
-                <div className="category">
+                <div className="landing-category">
                     <img src="https://i.pinimg.com/originals/93/08/19/93081945cca7fbe8606c3770f07b9128.jpg" alt="Fish" />
                     <p>Fish</p>
                 </div>
-                <div className="category">
+                <div className="landing-category">
                     <img src="https://cdn.loveandlemons.com/wp-content/uploads/2019/12/potato-soup-recipe-scaled.jpg" alt="Soup" />
                     <p>Soup</p>
                 </div>
-            </div><br/>
+            </div>
+            <br/>
 
             <hr/><br/>
 

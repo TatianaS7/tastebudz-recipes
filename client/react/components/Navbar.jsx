@@ -13,6 +13,22 @@ import { HomeOutline } from 'react-ionicons'
 function Navbar({ getAllRecipes, searchView, setSearchView, homeView, setHomeView, defaultView, setDefaultView, landingView, setLandingView, fetchUser }) {
     const { isAuthenticated, user } = useAuth0();
 
+    // Handle Logo Click
+    function handleLogoClick() {
+        if (isAuthenticated) {
+            fetchUser(user);
+            setHomeView(true);
+            setSearchView(false);
+            setDefaultView(true);
+            setLandingView(false);
+        } else {
+            setLandingView(true);
+            setHomeView(false);
+            setSearchView(false);
+            setDefaultView(false);
+        }
+    }
+
     // Search Button Click Handler
     function handleSearchClick() {
         setSearchView(true);
@@ -47,7 +63,7 @@ function Navbar({ getAllRecipes, searchView, setSearchView, homeView, setHomeVie
     return (
         <nav>
             <div className="left-align">
-                <button id="logo"><img src={logo}></img></button>
+                <button id="logo" onClick={() => handleLogoClick()}><img src={logo}></img></button>
                 {isAuthenticated && 
                     <button id="home" onClick={handleHomeClick}><HomeOutline color={'#00000'} height="25px" width="25px"/></button>
                 }

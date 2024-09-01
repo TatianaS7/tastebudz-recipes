@@ -41,21 +41,36 @@ h3 {
     text-align: center;
 }
 
-#categories {
+#landing-categories {
     display: flex;
     justify-content: space-evenly;
     gap: 1em;
+    height: 10em;
     margin: 1em 4em;
     overflow-x: auto;
 }
 
-.category {
-    text-align: center;
-}
-.category img {
-    height: 6em;
-    width: 6em;
+.landing-category {
+    height: 8em;
+    width: 9em;
     border-radius: 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
+}
+.landing-category img {
+    height: 8em;
+    width: 8em;
+    border-radius: 5em;
+    padding: 2px;
+    border: 1.5pt solid var(--accent-color);
+}
+
+.landing-category p {
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 600;
 }
 
 #popular-recipes {
