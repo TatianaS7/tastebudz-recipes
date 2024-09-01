@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 // Import Components
@@ -10,26 +10,39 @@ import logo from "../../assets/logo.png";
 import { SearchOutline } from 'react-ionicons'
 import { HomeOutline } from 'react-ionicons'
 
-function Navbar({ searchView, setSearchView, homeView, setHomeView, defaultView, setDefaultView, landingView, setLandingView, fetchUser }) {
+function Navbar({ getAllRecipes, searchView, setSearchView, homeView, setHomeView, defaultView, setDefaultView, landingView, setLandingView, fetchUser }) {
     const { isAuthenticated, user } = useAuth0();
 
     // Search Button Click Handler
     function handleSearchClick() {
-        if (isAuthenticated) {
-            setSearchView(!searchView);
-            setHomeView(!homeView);
-        } else {
-            setLandingView(!landingView);
-            setSearchView(true);
-        }
+        setSearchView(true);
+        setHomeView(false);
+        setDefaultView(false);
+        setLandingView(false);
+        console.log("Search View: ", true);
     }
+
+    useEffect(() => {
+        if (searchView) {
+            getAllRecipes();
+        }
+    }, [searchView]);
+
 
     function handleHomeClick() {
         fetchUser(user);
         setHomeView(true);
         setSearchView(false);
         setDefaultView(true);
+        console.log("Home View: ", true);
     }
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            fetchUser(user);
+        }
+    }, [isAuthenticated]);
+
 
     return (
         <nav>

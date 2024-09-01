@@ -3,10 +3,10 @@
     width: 13em;
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 0 10px 0 rgba(109, 108, 108, 0.784);
 }
 
 .recipe-image-div img {
-    /* height: fit-content; */
     max-width: 100%;
 }
 

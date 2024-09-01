@@ -10,7 +10,7 @@ import Saves from "./Saves";
 import RecipeDetails from "./RecipeDetails";
 
 
-function RecipeCard({ recipes, viewType, toggleMySaves, mySaves, fetchUser, refreshSaves, setRefreshSaves, setMySavedRecipes, mySavesView, expandGroupView, groupRecipes, showDetails }) {
+function RecipeCard({ recipe, key, viewType, searchView, toggleMySaves, mySaves, fetchUser, refreshSaves, setRefreshSaves, setMySavedRecipes, mySavesView, expandGroupView, groupRecipes, showDetails }) {
     const { isAuthenticated, user } = useAuth0();
 
     const [showRecipe, setShowRecipe] = useState(false);
@@ -47,10 +47,10 @@ function RecipeCard({ recipes, viewType, toggleMySaves, mySaves, fetchUser, refr
     
 
     return (
-        <div id={viewType === "defaultView" || viewType === "myRecipes" || viewType === "group" || viewType === "mySaves" ? "all-recipes" : "recipe-results"}>
-            {recipes && recipes.map((recipe, index) => {
-                return (
-                    <div key={index} className="recipe">
+        // <div id={ viewType === "myRecipes" || viewType === "group" || viewType === "mySaves" ? "all-recipes" : "recipe-results"}>
+        //     {recipes && recipes.map((recipe, index) => {
+                // return (
+                    <div key={key} className="recipe">
                         <div className="recipe-header">
                             <div className="left-side">
                                 {recipe.image &&
@@ -84,17 +84,18 @@ function RecipeCard({ recipes, viewType, toggleMySaves, mySaves, fetchUser, refr
                                 <p key={idx}>{ingredient.ingredient}{idx < 3 && idx < recipe.ingredients.length - 1 ? ',' : ''}</p>
                             ))}
                         </div><br/>
-                            <RecipeDetails key={recipe.id} recipe={recipe} toggleMySaves={toggleMySaves} mySaves={mySaves} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} currRecipe={currRecipe} setCurrRecipe={setCurrRecipe} showRecipe={showRecipe} setShowRecipe={setShowRecipe} viewType={viewType} />
+                            <RecipeDetails key={recipe.id} recipe={recipe} toggleMySaves={toggleMySaves} mySaves={mySaves} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} currRecipe={currRecipe} setCurrRecipe={setCurrRecipe} showRecipe={showRecipe} setShowRecipe={setShowRecipe} viewType={viewType} /><hr/>
                         <div className="footer tags">
                             {recipe.tags.map((tag, idx) => (
                                 <p key={idx}>#{tag}</p>
                             ))}
                         </div>
                     </div>
-                )})}
-        </div>
-    );
-}
+                )
+            }
+        // </div>
+//     );
+// }
 
 
 export default RecipeCard;

@@ -19,6 +19,7 @@ function App() {
     const [landingView, setLandingView] = useState(true);
     const [mySavesView, setMySavesView] = useState(false);
 
+    const [allRecipes, setAllRecipes] = useState([]);
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchedGroups, setSearchedGroups] = useState([]);
     const [userData, setUserData] = useState([]);
@@ -47,6 +48,25 @@ function App() {
             fetchUser(user);
         }
     }, [isAuthenticated]);
+
+
+        // Fetch All Public Recipes
+        async function getAllRecipes() {
+            try {
+                const res = await axios.get(`${apiURL}/recipes/all`);
+                const data = res.data;
+                setAllRecipes(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    
+        useEffect(() => {
+            if (searchView) {
+                getAllRecipes();
+            }
+        }, [searchView]);
+
 
     // Search Recipes Function
     async function searchRecipes(query) {
@@ -94,13 +114,14 @@ function App() {
 
     return (
         <main>
-            <Navbar searchView={searchView} setSearchView={setSearchView} landingView={landingView} setLandingView={setLandingView} homeView={homeView} setHomeView={setHomeView} defaultView={defaultView} setDefaultView={setDefaultView} fetchUser={fetchUser}/>
+            <Navbar getAllRecipes={getAllRecipes} searchView={searchView} setSearchView={setSearchView} landingView={landingView} setLandingView={setLandingView} homeView={homeView} setHomeView={setHomeView} defaultView={defaultView} setDefaultView={setDefaultView} fetchUser={fetchUser}/>
             {!isAuthenticated && landingView &&
                 <Landing />
             }
 
             {isAuthenticated && searchView || !isAuthenticated && searchView ?
-                <Search searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup} setHomeView={setHomeView} homeView={homeView} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySavedRecipes={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView}/>
+                <Search getAllRecipes={getAllRecipes} allRecipes={allRecipes} searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup} setHomeView={setHomeView} homeView={homeView} searchView={searchView} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySavedRecipes={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView}/>
+
             : isAuthenticated && homeView &&
                 <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySavedRecipes={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView}/>
             }

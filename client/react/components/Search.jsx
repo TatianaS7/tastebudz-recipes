@@ -6,9 +6,10 @@ import "../styles/search.css";
 
 import RecipeCardWrapper from "./RecipeCardWrapper";
 import GroupCard from "./GroupCard";
+import Categories from "./Categories";
 
 
-function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, joinGroup, setHomeView, homeView, fetchUser, refreshSaves, setRefreshSaves, mySavedRecipes, setMySavedRecipes, mySavesView, setMySavesView }) {
+function Search({ getAllRecipes, allRecipes, searchRecipes, searchedRecipes, searchGroups, searchedGroups, joinGroup, setHomeView, homeView, searchView, fetchUser, refreshSaves, setRefreshSaves, mySavedRecipes, setMySavedRecipes, mySavesView, setMySavesView }) {
     const [query, setQuery] = useState("");
     const [searchType, setSearchType] = useState("recipes");
 
@@ -17,10 +18,14 @@ function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, 
     }
 
     useEffect(() => {
-        query.length > 0 && searchType === 'recipes' ? 
-            searchRecipes(query) : 
-        searchGroups(query);
-    }, [query]);
+        if (query.length > 0) {
+            if (searchType === 'recipes') {
+                searchRecipes(query)
+            } else {
+                searchGroups(query);
+            }
+        }
+    }, [query, searchType]);
 
 
     function handleRecipeSearchClick(query) {
@@ -37,8 +42,15 @@ function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, 
         setQuery("");
     }
 
+    useEffect(() => {
+        if (searchView) {
+            getAllRecipes();
+            console.log(allRecipes);
+        }
+    }, [searchView]);
+
     return (
-        <content>
+        <div id="search-page">
         <div id="search-buttons">
             <button id="search-recipe-view" value={'recipes'} onClick={() => handleSearchTypeChange('recipes')}>Search Recipes</button>
             <button id="search-group-view" value={'groups'} onClick={() => handleSearchTypeChange('groups')}>Search Groups</button>
@@ -56,9 +68,28 @@ function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, 
                 </>
             )}
         </div>
-        {searchedRecipes.length > 0 && searchType === 'recipes' &&
+
+        {searchType === 'recipes' && searchView &&
+            <Categories 
+                allRecipes={allRecipes} 
+                searchType={searchType} 
+                fetchUser={fetchUser} 
+                searchView={searchView} 
+                searchedRecipes={searchedRecipes}
+                refreshSaves={refreshSaves} 
+                setRefreshSaves={setRefreshSaves} 
+                mySaves={mySavedRecipes} 
+                setMySavedRecipes={setMySavedRecipes}
+                mySavesView={mySavesView}
+                setMySavesView={setMySavesView}/>        
+        }
+
+        {searchType === 'recipes' && searchView && 
             <RecipeCardWrapper 
+            searchType={searchType}
             fetchUser={fetchUser} 
+            searchView={searchView}
+            allRecipes={allRecipes}
             searchedRecipes={searchedRecipes} 
             refreshSaves={refreshSaves} 
             setRefreshSaves={setRefreshSaves} 
@@ -81,7 +112,7 @@ function Search({ searchRecipes, searchedRecipes, searchGroups, searchedGroups, 
                 mySavesView={mySavesView} 
                 setMySavesView={setMySavesView}/>
         }
-        </content>
+        </div>
     );
 }
 

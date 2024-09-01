@@ -16,52 +16,12 @@ import CreateRecipe from "./CreateRecipe";
 function Home({ userData, defaultView, setDefaultView, fetchUser, refreshSaves, setRefreshSaves, mySavedRecipes, setMySavedRecipes, mySavesView, setMySavesView }) {
     const { user } = useAuth0();
     const [myRecipesView, setMyRecipesView] = useState(false);
-    const [allRecipes, setAllRecipes] = useState([]);
-    // const [mySavedRecipes, setMySavedRecipes] = useState([]);
-
     const [myGroupsView, setMyGroupsView] = useState(false);
-    // const [mySavesView, setMySavesView] = useState(false);
     const [createGroupView, setCreateGroupView] = useState(false);
     const [createRecipeView, setCreateRecipeView] = useState(false);
+
+    const [myGroupsRecipes, setMyGroupsRecipes] = useState([]);
     
-
-    // Fetch All Public Recipes
-    async function getAllRecipes() {
-        try {
-            const res = await axios.get(`${apiURL}/recipes/all`);
-            const data = res.data;
-            setAllRecipes(data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        if (defaultView) {
-            getAllRecipes();
-        }
-    }, [defaultView]);
-
-    // // Fetch User Saves
-    // async function fetchUserSaves(user) {
-    //     try {
-    //         const res = await axios.post(`${apiURL}/saves/all`, {
-    //             saved_by: user.email
-    //         })
-    //         const data = res.data;
-    //         setMySavedRecipes(data.saves);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     if (mySavesView || refreshSaves) {
-    //         fetchUserSaves(user);
-    //         setRefreshSaves(false);
-    //         fetchUser(user);
-    //     }
-    // }, [mySavesView, refreshSaves]);
     
 
     // Toggle My Recipes View
@@ -114,6 +74,18 @@ function Home({ userData, defaultView, setDefaultView, fetchUser, refreshSaves, 
         setCreateGroupView(false);
     }
 
+    // Capture My Groups Recipes to Display in Default View
+    useEffect(() => {
+        if (userData.groups && defaultView) {
+            fetchUser(user);
+            userData.groups.forEach(group => {
+                group.recipes.forEach(recipe => {
+                    setMyGroupsRecipes([...myGroupsRecipes, recipe]);
+                })
+            })
+        }
+    }, [defaultView]);
+
     return (
         <section>
             <h4 id="welcome">Welcome Back, {user.given_name}!</h4>
@@ -142,8 +114,10 @@ function Home({ userData, defaultView, setDefaultView, fetchUser, refreshSaves, 
                         )}
                     </div>
                     <div className="feed">
+                        {/*  Default View is recipes from groups user is in */}
                         {defaultView ? (
-                                <RecipeCardWrapper fetchUser={fetchUser} allRecipes={allRecipes} mySaves={mySavedRecipes} defaultView={defaultView} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} toggleMySaves={toggleMySaves} setMySavedRecipes={setMySavedRecipes}/>
+                            // console.log("Group Data", userData.groups[0].recipes)
+                                <RecipeCardWrapper myGroupsRecipes={myGroupsRecipes} defaultView={defaultView}/>
                         ) : createGroupView ? (
                                 <CreateGroup fetchUser={fetchUser} toggleMyGroups={toggleMyGroups}/>
                         ) : createRecipeView ? (

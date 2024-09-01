@@ -28,3 +28,8 @@
 #submit-recipe-search, #submit-group-search {
     width: 7em;
 }
+
+#search-page {
+    overflow-y: hidden;
+    max-height: 90vh;
+}

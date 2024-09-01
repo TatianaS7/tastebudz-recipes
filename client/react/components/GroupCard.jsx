@@ -104,8 +104,7 @@ function GroupCard({ searchedGroups, joinGroup, myGroups, myGroupsView, setMyGro
       )}
 
       <div id={myGroupsView ? "my-group-results" : "group-results"}>
-        {searchedGroups
-          ? searchedGroups.map((group, index) => {
+        {searchedGroups ? searchedGroups.map((group, index) => {
               return (
                 <div key={index} className="group">
                   <h3>{group.name}</h3>
