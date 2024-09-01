@@ -36,7 +36,7 @@ function GroupDetails({ groupData, expandGroupView, setExpandGroupView, toggleMy
 
 
   return (
-      <Modal show={toggleDetails} onHide={closeDetails} size="xl" centered style={{background: "none", height: 'fit-content'}}>
+      <Modal id="group-details-div" show={toggleDetails} onHide={closeDetails} size="xl" centered style={{background: "none", height: 'fit-content'}}>
         <Modal.Header>
           <div className="left-div">
             <h4>Group Details</h4>

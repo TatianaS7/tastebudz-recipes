@@ -23,6 +23,8 @@
 .category img {
     height: 6em;
     width: 6em;
+    padding: 2px;
+    border: 1.5pt solid var(--accent-color);
 }
 
 .category p {

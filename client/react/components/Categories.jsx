@@ -21,12 +21,12 @@ function Categories({ allRecipes, searchType, fetchUser, searchView, searchedRec
         let tags = [];
 
         // Reset the categories array
-        setCategories([]);
+        // setCategories([]);
 
         // Loop through all recipes and push each tag to the tags array
         allRecipes.forEach(recipe => {
             recipe.tags.forEach(tag => {
-                tags.push(tag);
+                tags.push(tag.toLowerCase());
             })
         });
         console.log(tags);
@@ -38,7 +38,7 @@ function Categories({ allRecipes, searchType, fetchUser, searchView, searchedRec
             tagCount[tag] = (tagCount[tag] || 0) + 1;
         });
 
-        console.log(tagCount);
+        console.log("tag count:", tagCount);
 
         // For each tag in the tagCount object, if the tag appears more than the average, add it to the categories list
         // Total tags is the length of the tags array
@@ -46,26 +46,26 @@ function Categories({ allRecipes, searchType, fetchUser, searchView, searchedRec
 
         // Scaled average is the count for each tag divided by the number of tags        
         let scaledAverage = totalTags / Object.keys(tagCount).length;
-        console.log(scaledAverage);
+        console.log("sclaed average:", scaledAverage);
 
+        // Create an array to store the categories
+        let newCategories = [];
         // Loop through the tagCount object and add tags that appear more than the scaled average to the categories list
         for (let tag in tagCount) {
             if (tagCount[tag] > scaledAverage) {
-
-                // If only one tag appears more than the average, it will be the only category
-                // If multiple tags appear more than the average, they will all be categories
-                setCategories([...categories, tag]);
+                newCategories.push(tag);
             }
         }
-        console.log(categories);
+        console.log("new categories list:", newCategories);
+        setCategories(newCategories);
     }
 
     useEffect(() => {
-        if (searchType === "recipes") {
+        if (searchType === "recipes" && allRecipes.length > 0) {
             captureTags();
         }
     }
-    , [searchType]);
+    , [searchType, allRecipes]);
 
     // Filter Recipes by Category
     function filterRecipesByCategory(category) {
@@ -87,7 +87,7 @@ function Categories({ allRecipes, searchType, fetchUser, searchView, searchedRec
         <div id="categories">
             <div className="category">
                 <button onClick={() => filterRecipesByCategory("All")}>
-                    <img src="https://media.istockphoto.com/id/146807105/photo/food-pyramid-pie-chart.jpg?s=612x612&w=0&k=20&c=SX0hFBaED3Wwi0G2pLfhsYN1GRjlyK8wzqHf-qUyJOk=" alt="all"></img>
+                    <img src="https://cdn.vox-cdn.com/thumbor/bif3U7XKUqWpOUv91_fXLfzsIx8=/0x0:6000x4000/1200x675/filters:focal(2520x1520:3480x2480)/cdn.vox-cdn.com/uploads/chorus_image/image/71262429/Le_Fantome.0.jpg" alt="all"></img>
                 </button>
                 <p>All</p>
             </div>
@@ -98,7 +98,7 @@ function Categories({ allRecipes, searchType, fetchUser, searchView, searchedRec
                         {categoryImages[category] ? (
                             <img src={categoryImages[category]} alt={category}></img>
                         ) : (
-                            <img src="https://media.istockphoto.com/id/146807105/photo/food-pyramid-pie-chart.jpg?s=612x612&w=0&k=20&c=SX0hFBaED3Wwi0G2pLfhsYN1GRjlyK8wzqHf-qUyJOk=" alt={category}></img>
+                            <img src="https://cdn.vox-cdn.com/thumbor/bif3U7XKUqWpOUv91_fXLfzsIx8=/0x0:6000x4000/1200x675/filters:focal(2520x1520:3480x2480)/cdn.vox-cdn.com/uploads/chorus_image/image/71262429/Le_Fantome.0.jpg" alt={category}></img>
                         )}
                     </button>
                     <p>{category}</p>

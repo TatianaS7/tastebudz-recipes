@@ -59,7 +59,7 @@ function RecipeCardWrapper({
   }
 
   return (
-    <div id={ viewType === "myGroupsRecipes" || viewType === "myRecipes" || viewType === "group" || viewType === "mySaves" ? "all-recipes" : "recipe-results"}>
+    <div id={ viewType === "myGroupsRecipes" || viewType === "myRecipes" || viewType === "mySaves" ? "all-recipes" : viewType === "group" ? "group-recipes" : "recipe-results"}>
       {recipes && recipes.map((recipe, index) => (
         <RecipeCard
           key={index}

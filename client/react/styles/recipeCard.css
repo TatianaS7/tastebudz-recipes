@@ -17,7 +17,7 @@
     height: 22em;
 }
 
-#all-recipes {
+#all-recipes, #group-recipes {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     /* display: flex;
@@ -28,6 +28,15 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: 2em;
+}
+
+#group-recipes .recipe {
+    width: 29em;
+    height: 22em;
+}
+
+#group-recipes h3 {
+    font-size: 15pt;
 }
 
 #all-recipes .recipe {
@@ -77,6 +86,10 @@
     gap: 1em;
 }
 
+#group-recipes img {
+    max-height: 6em;
+    box-shadow: 0 0 10px 0 rgba(109, 108, 108, 0.6);
+}
 .img-div img {
     max-height: 8em;
     max-width: 9em;
@@ -94,10 +107,11 @@
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    height: 4em;
-    margin: 0 2.5em;
+    height: 3em;
+    overflow-y: auto;
+    margin: 0 1em;
     color: var(--dark-grey);
-    gap: 0.5em;
+    gap: 0.2em;
 }
 
 .body {
@@ -142,3 +156,11 @@
 .time p, .servings p {
     margin-top: 0.5em;
 }
+
+.footer {
+    overflow-y: auto;
+    height: 3em;
+    display: flex;
+    flex-wrap: wrap;
+}
+

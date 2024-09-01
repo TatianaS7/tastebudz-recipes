@@ -7,6 +7,7 @@
     "dessert": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Desserts.jpg/640px-Desserts.jpg",
     "snack": "https://www.budgetbytes.com/wp-content/uploads/2019/05/Veggie-Snack-Packs-H.jpg",
     "salad": "https://thewoodenskillet.com/wp-content/uploads/2020/07/grilled-chicken-salad-recipe-1-1.jpg",
+    "light": "https://www.simplyrecipes.com/thmb/_-9wkM7yBub_gMTjG44S46l4neM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Air-Fryer-Crispy-Tofu-LEAD-5b-062074c644a048839977185b2ab4eb96.jpg",
     "tacos": "https://feelgoodfoodie.net/wp-content/uploads/2024/04/Ground-Beef-Tacos-TIMG.jpg",
     "soup": "https://static01.nyt.com/images/2023/08/10/multimedia/as-chicken-noodle-soup-jzfl/as-chicken-noodle-soup-jzfl-superJumbo.jpg",
     "side": "https://assets.epicurious.com/photos/5ad78633b24afe5122e72b5b/4:3/w_3108,h_2331,c_limit/blistered-asparagus-recipe-BA-041818.jpg",
@@ -22,6 +23,7 @@
     "turkey": "https://www.usda.gov/sites/default/files/fsis-turkey-day-myths-blog-111522.jpg",
     "vegetarian": "https://foodandnutrition.org/wp-content/uploads/GettyImages-849321850-780x520.jpg",
     "vegan": "https://beautyinunfinishededges.com/wp-content/uploads/2020/03/vegan-image-1.jpeg",
+    "pescatarian": "https://images.squarespace-cdn.com/content/v1/5fa5ec79661ee904d2973ca0/1704214259215-NPIBWI78W4MYGYHU9TLQ/pescatarian.jpg",
     "gluten free": "https://www.campkudzu.org/wp-content/uploads/2018/12/gluten-free-icon.png",
     "dairy free": "https://media.istockphoto.com/id/1385509434/vector/dairy-free-label-icon.jpg?s=612x612&w=0&k=20&c=ZV4zXRwxJHQ55s3fjGTsZCe85ks9w6NPfRu4Thfjio4="
 }

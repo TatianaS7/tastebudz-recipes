@@ -85,5 +85,45 @@
         "image": "https://www.twopeasandtheirpod.com/wp-content/uploads/2020/06/Watermelon-Feta-Salad-3.jpg",
         "tags": ["salad", "watermelon", "feta", "light"],
         "user": "david_saltman@yahoo.com"
+    },
+    {
+        "name": "Mediterranean Quinoa Salad",
+        "ingredients": [{"ingredient": "Quinoa","quantity": "1 cup"}, {"ingredient": "Cucumber","quantity": "1"}, {"ingredient": "Tomato","quantity": "1"}, {"ingredient": "Red Onion","quantity": "1/4 cup"}, {"ingredient": "Kalamata Olives","quantity": "1/4 cup"}, {"ingredient": "Feta Cheese","quantity": "1/4 cup"}, {"ingredient": "Lemon Juice","quantity": "1/4 cup"}, {"ingredient": "Olive Oil","quantity": "1/4 cup"}, {"ingredient": "Salt","quantity": "1/2 tsp"}, {"ingredient": "Pepper","quantity": "1/4 tsp"}, {"ingredient": "Garlic Powder", "quantity":"1/4 tsp"}],
+        "instructions": ["Over medium heat, toast quinoa until fragrant", "Cook quinoa according to package instructions", "Mix with chopped cucumber, tomato, red onion, olives, and feta", "Whisk together lemon juice, olive oil, salt, pepper, and garlic powder", "Pour over salad and mix well"],
+        "servings": 4,
+        "time": 30,
+        "image": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2019-11-recipe-mediterranean-quinoa-salad%2F2019-10-21_Kitchn89095_Mediteranean-Quinoa-Salad",
+        "tags": ["salad", "quinoa", "mediterranean", "light"],
+        "user": "samanthawebster@yahoo.com"
+    },
+    {
+        "name": "Crispy Brussels Sprouts",
+        "ingredients": [{"ingredient": "Brussels Sprouts","quantity": "1 lb"}, {"ingredient": "Olive Oil","quantity": "1/4 cup"}, {"ingredient": "Salt","quantity": "1/2 tsp"}, {"ingredient": "Pepper","quantity": "1/4 tsp"}, {"ingredient": "Garlic Powder", "quantity":"1/4 tsp"}, {"ingredient": "Parmesan Cheese","quantity": "1/4 cup"}],
+        "instructions": ["Preheat oven to 400 degrees", "Cut Brussels sprouts in half", "Toss with olive oil, salt, pepper, and garlic powder", "Roast for 30 minutes", "Top with Parmesan cheese"],
+        "servings": 4,
+        "time": 40,
+        "image": "https://www.wellplated.com/wp-content/uploads/2019/08/Roasted-Brussels-with-Garlic-Easy.jpg",
+        "tags": ["vegetable", "brussels sprouts", "sides", "vegetarian"],
+        "user": "aliyah_walters@yahoo.com"
+    },
+    {
+        "name": "Chilean Seabass w/ Garlic Mash",
+        "ingredients": [{"ingredient": "Chilean Seabass","quantity": "1 lb"}, {"ingredient": "Potatoes","quantity": "1 lb"}, {"ingredient": "Butter","quantity": "1/4 cup"}, {"ingredient": "Garlic","quantity": "2 cloves"}, {"ingredient": "Lemon Juice","quantity": "1/4 cup"}, {"ingredient": "Salt","quantity": "1/2 tsp"}, {"ingredient": "Pepper","quantity": "1/4 tsp"}, {"ingredient": "Parsley","quantity": "1/4 cup"}],
+        "instructions": ["Preheat oven to 400 degrees", "Season seabass with salt, pepper, and lemon juice", "Bake for 20 minutes", "Boil potatoes until tender", "Mash with butter, garlic, salt, and pepper", "Top with parsley"],
+        "servings": 4,
+        "time": 30,
+        "image": "https://www.cookedbyjulie.com/wp-content/uploads/2022/04/baked-chilean-sea-bass-one.jpg",
+        "tags": ["seafood", "chilean seabass", "dinner", "pescatarian", "potatoes"],
+        "user": "malcolm_ruffey@yahoo.com"
+    },
+    {
+        "name": "Lemon Garlic Shrimp",
+        "ingredients": [{"ingredient": "Shrimp","quantity": "1 lb"}, {"ingredient": "Lemon","quantity": "1"}, {"ingredient": "Garlic","quantity": "2 cloves"}, {"ingredient": "Butter","quantity": "1/4 cup"}, {"ingredient": "Salt","quantity": "1/2 tsp"}, {"ingredient": "Pepper","quantity": "1/4 tsp"}, {"ingredient": "Parsley","quantity": "1/4 cup"}],
+        "instructions": ["Melt butter in a pan", "Add garlic and lemon juice", "Add shrimp", "Cook until pink", "Top with parsley"],
+        "servings": 4,
+        "time": 20,
+        "image": "https://feelgoodfoodie.net/wp-content/uploads/2023/02/Lemon-Garlic-Shrimp-08.jpg",
+        "tags": ["seafood", "shrimp", "dinner", "pescatarian"],
+        "user": "hannah_lawson@gmail.com"
     }
 ]

@@ -69,6 +69,11 @@ function RecipeDetails({
             </div>
 
             <div className="details-right-side">
+              {/* If user currently logged in is the creator of the recipe, show edit button */}
+                {user && user.email === currRecipe.user && (
+                  <button>
+                    edit
+                  </button>)}
                 { isAuthenticated && (viewType !== "myRecipes") && <Saves key={recipe.id} recipe={recipe} toggleMySaves={toggleMySaves} mySaves={mySaves} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves}/>}
             </div>
             </div>

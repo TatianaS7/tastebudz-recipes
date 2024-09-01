@@ -61,7 +61,7 @@ function RecipeCard({ recipe, key, viewType, searchView, toggleMySaves, mySaves,
                                 <div className="name-div">
                                     <h3>{recipe.name}</h3>
                                     <p className="user">Created by: {recipe.user}</p>
-
+                                
                                     <div className="stats">
                                         {recipe.time && <div className="time"><TimeOutline color={'#ad78de'} height="22px" width="22px" /> <p>{recipe.time} mins</p></div>}
                                         {recipe.servings && <div className="servings"><PeopleOutline color={'#ad78de'} height="22px" width="22px" /><p>{recipe.servings} servings</p></div>}
