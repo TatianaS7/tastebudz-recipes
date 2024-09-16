@@ -1,6 +1,6 @@
 # Frontend
 node_ modules/
-
+.DS_Store
 .parcel-cache/
 
 # Byte-compiled / optimized / DLL files

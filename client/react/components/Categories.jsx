@@ -46,7 +46,7 @@ function Categories({ allRecipes, searchType, fetchUser, searchView, searchedRec
 
         // Scaled average is the count for each tag divided by the number of tags        
         let scaledAverage = totalTags / Object.keys(tagCount).length;
-        console.log("sclaed average:", scaledAverage);
+        console.log("scaled average:", scaledAverage);
 
         // Create an array to store the categories
         let newCategories = [];

@@ -2,7 +2,7 @@
     display: flex;
     gap: 2em;
     justify-content: center;
-    margin-top: 3em;
+    margin-top: 1em;
     font-size: 16pt;
 }
 
@@ -10,6 +10,15 @@
     background: none;
     border: none;
 }
+
+#search-recipe-view.active {
+    text-decoration: underline solid #ff914d;
+}
+
+#search-group-view.active {
+    text-decoration: underline solid #ff914d;
+}
+
 #searchbar {
     width: 70%;
     height: 3em;

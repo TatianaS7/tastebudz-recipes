@@ -13,7 +13,7 @@ import CreateRecipe from "./CreateRecipe";
 
 
 
-function Home({ userData, defaultView, setDefaultView, fetchUser, refreshSaves, setRefreshSaves, mySavedRecipes, setMySavedRecipes, mySavesView, setMySavesView }) {
+function Home({ userData, allRecipes, defaultView, setDefaultView, fetchUser, refreshSaves, setRefreshSaves, mySavedRecipes, setMySavedRecipes, mySavesView, setMySavesView }) {
     const { user } = useAuth0();
     const [myRecipesView, setMyRecipesView] = useState(false);
     const [myGroupsView, setMyGroupsView] = useState(false);
@@ -76,15 +76,21 @@ function Home({ userData, defaultView, setDefaultView, fetchUser, refreshSaves, 
 
     // Capture My Groups Recipes to Display in Default View
     useEffect(() => {
-        if (userData.groups && defaultView) {
+        if (defaultView) {
             fetchUser(user);
-            userData.groups.forEach(group => {
-                group.recipes.forEach(recipe => {
-                    setMyGroupsRecipes([...myGroupsRecipes, recipe]);
+            if (userData.groups && userData.groups.length > 0) {
+                const recipes = [];
+                userData.groups.forEach(group => {
+                    group.recipes.forEach(recipe => {
+                        recipes.push(recipe);
+                    })
                 })
-            })
+                setMyGroupsRecipes(recipes);
+            } else if (allRecipes && allRecipes.length > 0) {
+                setMyGroupsRecipes(allRecipes);
+            }
         }
-    }, [defaultView]);
+    }, [defaultView, userData.groups, allRecipes, fetchUser, user]);
 
     return (
         <section>

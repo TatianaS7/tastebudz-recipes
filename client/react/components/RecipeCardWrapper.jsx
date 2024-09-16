@@ -28,7 +28,7 @@ function RecipeCardWrapper({
 
   // The user is viewing all of their groups' recipes
   if (defaultView && myGroupsRecipes) {
-    console.log("myGroupsRecipes", myGroupsRecipes);
+    // console.log("myGroupsRecipes", myGroupsRecipes);
     recipes = myGroupsRecipes;
     viewType = "myGroupsRecipes";
     // The user is viewing recipes returned from a search

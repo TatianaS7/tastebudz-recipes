@@ -40,12 +40,27 @@ function Search({ getAllRecipes, allRecipes, searchRecipes, searchedRecipes, sea
     function handleSearchTypeChange(type) {
         setSearchType(type);
         setQuery("");
+        const recipesBtn = document.getElementById("search-recipe-view");
+        const groupsBtn = document.getElementById("search-group-view");
+    
+        if (type === 'recipes') {
+            recipesBtn.classList.add("active");
+            groupsBtn.classList.remove("active");
+        } else {
+            groupsBtn.classList.add("active");
+            recipesBtn.classList.remove("active");
+        }
     }
 
     useEffect(() => {
         if (searchView) {
             getAllRecipes();
             console.log(allRecipes);
+            const recipesBtn = document.getElementById("search-recipe-view");
+            const groupsBtn = document.getElementById("search-group-view");
+        
+            recipesBtn.classList.add("active");
+            groupsBtn.classList.remove("active");
         }
     }, [searchView]);
 

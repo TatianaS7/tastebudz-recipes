@@ -62,7 +62,7 @@ function App() {
         }
     
         useEffect(() => {
-            if (searchView) {
+            if (searchView || defaultView) {
                 getAllRecipes();
             }
         }, [searchView]);
@@ -123,7 +123,7 @@ function App() {
                 <Search getAllRecipes={getAllRecipes} allRecipes={allRecipes} searchRecipes={searchRecipes} searchedRecipes={searchedRecipes} setSearchedRecipes={setSearchedRecipes} searchGroups={searchGroups} searchedGroups={searchedGroups} setSearchedGroups={setSearchedGroups} joinGroup={joinGroup} setHomeView={setHomeView} homeView={homeView} searchView={searchView} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySavedRecipes={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView}/>
 
             : isAuthenticated && homeView &&
-                <Home userData={userData} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySavedRecipes={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView}/>
+                <Home userData={userData} allRecipes={allRecipes} defaultView={defaultView} setDefaultView={setDefaultView} setSearchView={setSearchView} fetchUser={fetchUser} refreshSaves={refreshSaves} setRefreshSaves={setRefreshSaves} mySavedRecipes={mySavedRecipes} setMySavedRecipes={setMySavedRecipes} mySavesView={mySavesView} setMySavesView={setMySavesView}/>
             }
         </main>
     )

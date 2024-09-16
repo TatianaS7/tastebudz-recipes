@@ -1,12 +1,11 @@
 #logo {
     background: none;
     border: none;
-    font-size: 18pt;
-    font-weight: bold;
 }
 
 #logo img {
-    height: 1em;
+    height: 6em;
+    background: none;
 }
 
 nav {
@@ -14,7 +13,8 @@ nav {
     justify-content: space-between;
     padding: 1em;
     border-bottom: var(--accent-color) 2px solid;
-    height: 5em;
+    height: 9em;
+    margin-bottom: 1em;
 }
 
 .left-align {
@@ -28,6 +28,13 @@ nav {
     align-items: center;
     gap: 2em;
 }
+
+
+#login-div #login {
+    margin: 0 1em 0 0;
+}
+
+
 
 #logout, #home, #searchBtn {
     background: none;
